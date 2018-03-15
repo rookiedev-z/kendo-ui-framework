@@ -1,1 +1,1 @@
-ui# kendo-ui-framework
+ui# kendo-ui example
