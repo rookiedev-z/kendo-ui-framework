@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>修改列表 | UI 2.0</title>
+  <meta charset="utf-8">
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+
+</head>
+<body>
+  <body>
+    <div id="_sub_layout">
+      <div id="_sub_layout_top">
+        <form id="search_form">
+          <table class="form-table">
+            <tr>
+              <td width="60" class="label">名称：</td>
+              <td width="180">
+                <input name="condition.name" class="k-textbox" type="text">
+              </td>
+              <td width="100" class="label">编码：</td>
+              <td width="180">
+                <input name="condition.code" class="k-textbox" type="text">
+              </td>
+              <td></td>
+              <td width="100">
+                <button type="submit" class="k-button btn-primary">查询</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div id="_sub_layout_middle">
+        <div id="grid"></div>
+      </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+    <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+    <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+    <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+    <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+    <script>
+      var grid;
+      $(function() {
+        $("#_sub_layout").kendoSplitter({
+          orientation: "vertical",
+          panes: [{
+            collapsible: false,
+            resizable: false,
+            scrollable: false,
+            size: $("#search_form").height()
+          }, {
+            collapsible: false
+          }]
+        });
+
+        //{"content":[{"code":"智慧应用平台研发部智慧应用平台研发部","createdDate":"2017-03-11 09:53:07","id":1000024,"lastModifiedDate":"2017-03-11 09:53:27","name":"智慧应用平台研发部"},{"code":"4026","createdDate":"2017-03-11 09:22:41","id":1000023,"name":"test2"},{"code":"ch","createdDate":"2017-03-11 09:21:16","id":1000010,"name":"出生地1"},{"code":"GENDER","createdDate":"2017-03-09 18:18:58","id":1000002,"name":"性别"},{"code":"USER_STATUS","createdDate":"2017-03-09 18:18:58","id":1000001,"name":"用户状态"}],"first":true,"last":true,"number":0,"numberOfElements":5,"size":100,"totalElements":5,"totalPages":1}
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            {"code":"DEPARTMENT","createdDate":"2016-11-11 09:53:07","id":1000024,"lastModifiedDate":"2016-03-11 09:53:27","name":"部门"},
+            {"code":"4026","createdDate":"2016-11-11 09:22:41","id":1000023,"name":"test"},
+            {"code":"BIRTH_PLACE","createdDate":"2016-11-11 09:21:16","id":1000010,"name":"出生地"},
+            {"code":"GENDER","createdDate":"2016-11-09 18:18:58","id":1000002,"name":"性别"},
+            {"code":"USER_STATUS","createdDate":"2016-11-09 18:18:58","id":1000001,"name":"用户状态"}
+          ]
+        });
+
+        grid = $("#grid").kendoExtGrid({
+          entityName: "dictionary",
+          toolbarButtons: [{
+            name: "新增",
+            icon: "icon-zengjiaxiang",
+            onclick: function(grid, btn) {
+              grid.addRow();
+            }
+          }, {
+            name: "进入字典",
+            icon: "icon-caidanfenpei",
+            onclick: function(grid, btn) {
+              if (!grid || grid.select().length == 0) {
+                notify("没有选择任何行.", "warning");
+                return;
+              }
+              var data = grid.dataItem(grid.select()[0]);
+              dialog("dlg_dic_item_list", data.name, "/dic/dictionary-item/list?condition.dictionaryCode=" + data.code, 1000, 600);
+            }
+          }],
+          editable: "inline",
+          dataSource: dataSource,
+          // dataSource: new kendo.data.DataSource({
+          //   transport: {
+          //     read: {
+          //       url: "list",
+          //       type: "POST",
+          //       dataType: "json",
+          //       cache: false,
+          //       traditional: true
+          //     },
+          //     update: {
+          //       url: "edit",
+          //       type: "POST",
+          //       contentType: "application/json",
+          //     },
+          //     destroy: {
+          //       url: "delete",
+          //       type: "POST"
+          //     },
+          //     create: {
+          //       url: "add",
+          //       type: "POST",
+          //       contentType: "application/json",
+          //     },
+          //     parameterMap: function(data, type) {
+          //       if (type == "read") {
+          //         data.page = data.page - 1;
+          //         data.size = data.pageSize;
+          //         data.pageSize = undefined;
+          //         data.take = undefined;
+          //         data.skip = undefined;
+          //         delete data.take;
+          //         delete data.skip;
+          //         delete data.pageSize;
+          //         if (data.sort) {
+          //           for (var i = 0; i < data.sort.length; i++) {
+          //             var s = data.sort[i];
+          //             data.sort[i] = s.field + "," + s.dir;
+          //           }
+          //         }
+          //         return data;
+          //       }
+          //       if (type == "destroy") {
+          //         return data;
+          //       } else {
+          //         return kendo.stringify(data);
+          //       }
+          //     }
+          //   },
+          //   schema: {
+          //     type: "json",
+          //     data: "content",
+          //     total: "totalElements",
+          //     model: {
+          //       id: "id",
+          //       fields: {
+          //         name: {
+          //           validation: {
+          //             required: true
+          //           }
+          //         },
+          //         code: {
+          //           validation: {
+          //             required: true
+          //           }
+          //         }
+          //       }
+          //     }
+          //   },
+          //   serverPaging: true,
+          //   pageSize: 100
+          // }),
+          columns: [{
+            field: "id",
+            hidden: true
+          }, {
+            field: "name",
+            title: "名称",
+            width: 200
+          }, {
+            field: "code",
+            title: "编码",
+            width: 400
+          }, {
+            command: ["edit", "destroy"],
+            title: "&nbsp;"
+          }]
+        }).data("kendoExtGrid");
+      });
+    </script>
+  </body>
+
+</html>

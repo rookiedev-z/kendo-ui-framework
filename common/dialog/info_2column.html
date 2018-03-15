@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>详情信息 | UI2.0</title>
+
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <form id="_sub_layout" class="dialog-form">
+    <div id="_sub_layout_center">
+      <table class="form-table">
+        <tr>
+          <td width="12%" class="label">设备名称：</td>
+          <td width="35%" class="form-static">云计算大楼1号楼设备01</td>
+          <td width="14%" class="label">设备编码：</td>
+          <td width="35%" class="form-static">A_01F_DM_01</td>
+          <td width="4%"></td>
+        </tr>
+        <tr>
+          <td class="label">设备项目：</td>
+          <td class="form-static">Tourage UI 模板 1.0</td>
+          <td class="label">标签：</td>
+          <td>
+            <span class="simple-tag">Tags</span>
+            <span class="simple-tag"><i class="iconfont icon-wenhao"></i>UI</span>
+            <span class="simple-tag"><i class="iconfont icon-java"></i>Tourage</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">报警状态：</td>
+          <td class="form-static"><span class="text-danger">异常</span></td>
+          <td class="label">报警时间：</td>
+          <td class="form-static">2017-06-12 00:12:52</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td valign="top" class="label">报警描述：</td>
+          <td colspan="3" class="form-static">
+            报警详情描述描述风格的郭德纲的风格的非官。报警详情描述描述风格的郭德纲的风，格的非官方的规范和华润丰东股份的规范的的股份。
+            方的规范和华润丰东股份的规范的的股份，报警详情描述描述风格的郭，德纲的风、格的。
+            非官方的规范和华润丰东股份的规范的的股报警详情描述描述风格的郭德纲的风格的非官方的规范和华润丰东股份的规范的的股份
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label" valign="top">相关文件：</td>
+          <td colspan="3" class="form-static">
+            <a class="k-link" title="下载">报警描述.doc <span class="text-underline">下载</span></a><br>
+            <a class="k-link" title="下载">相关异常处理说明.doc <span class="text-underline">下载</span></a>
+          </td>
+        </tr>
+      </table>
+      <div id="system_line" style="height:200px;margin:0 5%;"></div>
+    </div>
+    <div id="_sub_layout_bottom">
+      <div class="footer text-center">
+        <button class="k-button btn-primary" type="submit">
+          <i class="iconfont icon-dui"></i>&nbsp;确定
+        </button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="k-button btn-white" type="reset">
+          <i class="iconfont icon-cuowu"></i>&nbsp;取消
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Mainly scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+  <!-- Custom scripts -->
+
+  <script type="text/javascript">
+    $(function() {
+
+      $("#_sub_layout").kendoSplitter({
+        orientation: "vertical",
+        panes: [{
+          collapsible: false
+        }, {
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: $(".footer").outerHeight() || "49px"
+        }]
+      });
+
+    });
+  </script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/plugins/echart/echarts.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/echart/theme/custom.macarons.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/echart_demo.js"></script>
+</body>
+
+</html>

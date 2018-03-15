@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Index | UI2.0</title>
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="_layout" style="background-color: #2f4050;">
+
+    <div id="leftPanel" style="overflow-y:auto">
+      <div id="menu_header" style="padding-left:20px;">
+        <div style="">
+          <!-- <img class="img-circle" style="width:100%;height:100%" src="./data/imgs/EASTC.jpg"/> -->
+          <img class="logo" src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/images/logo.png"/>
+        </div>
+        <div class="dropdown m-xs">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="block font-bold text-white"><strong>Janice</strong></span>
+            <span class="text-muted">lianjf@tourage.cn <i class="iconfont icon-caretdown"></i></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a onclick="dialog('modify_pwd','修改密码','./common/dialog/password_edit.html',350,200)"><i class="iconfont icon-xiugai"></i> 修改密码</a>
+            </li>
+            <li>
+              <a onclick="alert('click')"><i class="iconfont icon-xitong"></i> 我的配置</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a><i class="iconfont icon-logout"></i> 退出登录</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ul id="menu"></ul>
+    </div>
+
+    <div id="_main_content" class="gray-bg">
+      <iframe id="_main_frame" name="_main_frame" scrolling="auto" frameborder="0" class="k-content-frame" src="./common/app/app3/app3.html"></iframe>
+
+      <!-- <div style="position:absolute; bottom: 40%; right: 15px; width: 80px;">
+        <a class="k-button btn-white m-b-xs" style="width: 80px;" onclick="helpHandler()">
+          <i class="iconfont icon-wenhao"></i> Help
+        </a>
+        <a class="k-button btn-white" style="width: 80px;" onclick="viewCode()">
+          <i class="iconfont icon-code"></i> Code
+        </a>
+      </div> -->
+    </div>
+  </div>
+
+
+  <!-- Mainly scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+  <!-- Custom scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/main.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/dropdown.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/base64.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("#_layout").kendoSplitter({
+        orientation: "horizontally",
+        panes: [{
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: "230px"
+        }, {
+          collapsible: false
+        }]
+      });
+
+      $("#menu").kendoExtMenuPanelBar({
+        expandMode: "single",
+        dataSource: [{
+        //   text: "<i class='iconfont icon-home'></i>首页",
+        //   encoded: false, // Allows use of HTML for item text
+        //   cssClass: "myClass", // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
+        //   // url: "about:blank" // Link URL if navigation is needed, optional.
+        //   url: "./common/app/app3/app3.html"
+        //     // content: "text"                              // content within an item
+        // }, {
+          text: "<i class='iconfont icon-yingyong'></i>子系统入口APP",
+          encoded: false,
+          items: [{
+            text: "子系统",
+            encoded: false,
+            url: "./common/app/app3/app3.html"
+          },{
+            text: "AppCarousel with Spillter",
+            encoded: false,
+            url: "./common/app/appwindow_splitter/app.html"
+          }]
+        }, {
+          text: "<i class='iconfont icon-jiankong'></i>Dashboard",
+          encoded: false,
+          items: [{
+            text: "Dashboard1-Panels",
+            encoded: false,
+            url: "./common/draggable_panels.html"
+          },{
+            text: "Dashboard 2",
+            encoded: false,
+            url: "./common/dashboard/dashboard_2.html"
+          }]
+        }, {
+          text: "<i class='iconfont icon-xiugai'></i>表单Form",
+          encoded: false,
+          items: [{
+            text: "基础表单元素",
+            encoded: false,
+            url: "./common/form/form_basic.html"
+          }, {
+            text: "按节伸缩",
+            encoded: false,
+            url: "./common/form/form_collapse.html"
+          }, {
+            text: "带Tabs",
+            encoded: false,
+            url: "./common/form/form_tabs.html"
+          }]
+        }, {
+          text: "<i class='iconfont icon-list-line'></i>数据列表",
+          encoded: false,
+          items: [
+            {
+              text: "基础列表",
+              encoded: false,
+              url: "./common/gridlist/grid.html"
+            },{
+              text: "排序&操作",
+              encoded: false,
+              url: "./common/gridlist/grid_sortable.html"
+            },{
+              text: "RowTemplate",
+              encoded: false,
+              url: "./common/gridlist/grid_rowtemplate.html"
+            },{
+              text: "搜索列表",
+              encoded: false,
+              url: "./common/gridlist/grid_search.html"
+            // },{
+            //   text: "查询重置&NoRecords",
+            //   encoded: false,
+            //   url: "./common/gridlist/grid_norecords.html"
+            },{
+              text: "GroupHeader &amp; Locked",
+              encoded: false,
+              url: "./common/gridlist/grid_groupheader.html"
+            },{
+              text: "单选/多选",
+              encoded: false,
+              url: "./common/gridlist/grid_select.html"
+            // },{
+            //   text: "[PopUp] 选择用户",
+            //   encoded: false,
+            //   url: "./common/dialog/user_select.html"
+            },{
+              text: "修改列表",
+              encoded: false,
+              url: "./common/gridlist/list_edit.html"
+            },{
+              text: "TreeList",
+              encoded: false,
+              url: "./common/gridlist/treelist.html"
+            },{
+              text: "TreeList文件列表",
+              encoded: false,
+              url: "./common/gridlist/treelist_template.html"
+            }
+          ]
+        }, {
+          text: "<i class='iconfont icon-zengjiaxiang'></i>新增表单 [PopUp]",
+          encoded: false,
+          items: [{
+            text: "带编辑器表单（弹窗多选）",
+            encoded: false,
+            url: "./common/dialog/js/add_editor_js.html"
+          }, {
+            text: "双列表单（文件上传）",
+            encoded: false,
+            url: "./common/dialog/js/add_2column_fileupload_js.html"
+          // }, {
+          //   text: "带边框（照片上传）",
+          //   encoded: false,
+          //   url: "./common/dialog/js/add_bordered_js.html"
+          }, {
+            text: "User+（Fieldset、Validator)",
+            encoded: false,
+            url: "./common/dialog/js/add_user_js.html"
+          }, {
+            text: "添加多行",
+            encoded: false,
+            url: "./common/dialog/js/add_multiple_line_js.html"
+          }]
+        }, {
+          text: "<i class='iconfont icon-esearch'></i>详情页面",
+          encoded: false,
+          items: [
+            {
+              text: "详情Profile",
+              encoded: false,
+              url: "./common/profile.html"
+            },{
+              text: "简单文字详情",
+              encoded: false,
+              url: "./common/dialog/js/info_2column_js.html"
+            },{
+              text: "建筑详情（AppCarousel）",
+              encoded: false,
+              url: "./common/dialog/js/info_js.html"
+            }
+          ]
+        }, {
+          text: "<i class='iconfont icon-table'></i>静态表格",
+          encoded: false,
+          items: [
+            {
+              text: "各类表格",
+              encoded: false,
+              url: "./common/tables.html"
+            }
+          ]
+        }, {
+          text: "<i class='iconfont icon-table'></i>App Views",
+          encoded: false,
+          items: [
+            {
+              text: "照片ListView",
+              encoded: false,
+              url: "./common/app_view/listview.html"
+            }, {
+              text: "照片AppCarousel",
+              encoded: false,
+              url: "./common/app_view/appCarousel.html"
+            // }, {
+            //   text: "管理员列表",
+            //   encoded: false,
+            //   url: "./common/app_view/contacts11.html"
+            }
+          ]
+        }, {
+          text: "<i class='iconfont icon-yingyong1'></i>UI元素",
+          encoded: false,
+          items: [{
+            text: "Icons",
+            encoded: false,
+            url: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/demo.html"
+          }, {
+            text: "k-icons",
+            encoded: false,
+            url: "./common/k_icons.html"
+          }, {
+            text: "Buttons &amp; Labels",
+            encoded: false,
+            url: "./common/buttons.html"
+          // }, {
+          //   text: "Panels",
+          //   encoded: false,
+          //   url: "./common/panels.html"
+          }, {
+            text: "Tabs",
+            encoded: false,
+            url: "./common/tabs.html"
+          }, {
+            text: "Notification & Tooltips",
+            encoded: false,
+            url: "./common/notification.html"
+          }]
+        }, {
+          text: "<i class='iconfont icon-windowszhuanhuan'></i>其他页面",
+          encoded: false,
+          items: [{
+            text: "注册",
+            encoded: false,
+            url: "./common/register.html"
+          }, {
+            text: "登录",
+            encoded: false,
+            url: "./common/login.html"
+          }, {
+            text: "登录2",
+            encoded: false,
+            url: "./common/login2.html"
+          }, {
+            text: "404 Page",
+            encoded: false,
+            url: "./common/404.html"
+          }, {
+            text: "500 Page",
+            encoded: false,
+            url: "./common/500.html"
+          }, {
+            text: "No Data",
+            encoded: false,
+            url: "./common/no_data.html"
+          }, {
+            text: "维护中",
+            encoded: false,
+            url: "./common/maintenance.html"
+          }, {
+            text: "帮助",
+            encoded: false,
+            url: "./common/help.html"
+          }]
+        }],
+        select: function(e) {
+          var url = $(e.item).children("a:eq(0)").attr("url");
+          if (url) {
+            loadFrame(url);
+          }
+          return false;
+        }
+      });
+
+      // 计算页面数
+      $("#menu li").each(function(idx, it){
+        var count = $(it).find("a").length;
+        $(it).children("span.k-link").html($(it).children("span.k-link").html()+ "（" + count + "）");
+      })
+
+    });
+
+    function loadFrame(url) {
+      if (!url) return;
+
+      kendo.ui.progress($("_main_content"), true);
+
+      var encodedUrl = $.base64.encode(url);
+
+      window.location.hash = encodedUrl;
+
+      var frame = document.getElementById("_main_frame");
+      if (frame) {
+        frame.src = "about:blank";
+        try {
+          frame.contentWindow.document.write("");
+          frame.contentWindow.clear();
+        } catch (e) {}
+      }
+
+      iframeLoaded(frame, function() {
+        kendo.ui.progress($("#_main_content"), false);
+      });
+
+      frame.src = url;
+    }
+  </script>
+
+</body>
+
+</html>

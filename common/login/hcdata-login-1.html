@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" />
+<title>Zeus - 登录</title>
+</head>
+
+<body id="login_body">
+<div id="login_register">
+  <div class="login-card">
+    <form class="login-form">
+      <div class="login-header">
+        <div class="login-logo">
+        </div>
+        <h2>Please Sign In</h2>
+      </div>
+      <div class="login-content">
+        <fieldset class="login">
+          <div class="loginForm-group loginForm-icons login-user">
+            <i class="iconfont icon-zhanghaotouxiang"></i>
+            <input id="user" type="text" name="user" value="" placeholder="用户名">
+          </div>
+          <div class="loginForm-group loginForm-icons login-pass">
+            <i class="iconfont icon-mima"></i>
+            <input id="password" type="password" name="password" value="" placeholder="密码">
+          </div>
+          <input type="submit" id="submit" name="login" class="login login-submit fullButton disabled" disabled="" value="登录">
+          <div class="login-forgot clearfix">
+            <div class="left">
+              <p>
+                没有账号?<br>
+                <a href="/user/registration.html">注册</a>
+              </p>
+            </div>
+            <div class="right">
+              <p>
+                忘记密码?<br>
+                <a href="/user/forgot-password.html">重置密码</a>
+              </p>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div id="login_footer">
+  <div id="login_footer_nav">
+    <ul>
+      <li>© 2017 Tourage</li>
+      <li>
+        <a href="http://tourage.cn/">Resources</a>
+      </li>
+      <li>
+        <a href="http://tourage.cn/">Contact</a>
+      </li>
+      <li>
+        <a href="http://tourage.cn/">Document</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+html, body {
+  height: 100%;
+}
+html,body,ul,li,div,table,td,form,fieldset,p{
+  padding: 0;
+  margin: 0;
+}
+#login_body {
+  -webkit-font-smoothing: antialiased!important;
+}
+#login_body a {
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  color: #005984; /*#06C*/
+}
+#login_body a:hover{
+  color: #039;
+}
+#login_register {
+  left: 0;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-width: none;
+  width: 100%;
+}
+#login_register .login-card {
+  background: rgba(0, 0, 0, 0) url(./images/login.png) center bottom no-repeat;
+  color: #787878;
+  min-height: 600px;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 40px;
+  width: 100%;
+}
+#login_register .login-card:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+#login_register .login-card form {
+  font: 15px/19px "CalibreWeb-Regular",san-serif;
+  text-align: left;
+  background: #fff;
+  background-color: rgba(255,255,255,.8);
+  border: 1px solid #e3e3e3;
+  box-sizing: border-box;
+  border-radius: 6px;
+  left: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 40px 80px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+  max-width: 550px;
+  width: 100%;
+}
+#login_register .login-card form .login-logo {
+  width: 100%;
+  height: 50px;
+  background: url(./images/logo.png) center center no-repeat;
+}
+#login_register .login-card form .login-header {
+  text-align: center;
+}
+#login_register .login-card form .login-header h2 {
+  color: #29a7de;
+  font: normal 26px/1em "CalibreWeb-Light",san-serif;
+  margin: 20px 0 43px;
+}
+#login_register form fieldset {
+  border: 0;
+}
+#login_register .login-card form .loginForm-icons {
+  margin-bottom: 40px;
+  position: relative;
+}
+#login_register form input[type="text"],
+#login_register form input[type="password"] {
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #666;
+  font: 16px/20px "CalibreWeb-Regular",san-serif;
+  height: 50px;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+  outline: none;
+}
+#login_register .login-card form .loginForm-icons input[type="text"],
+#login_register .login-card form .loginForm-icons input[type="password"] {
+  padding: 10px 10px 10px 65px;
+}
+#login_register .login-card form .loginForm-icons .iconfont {
+  background-color: #f0f0f0;
+  border-right: 1px solid #dcdcdc;
+  bottom: 1px;
+  color: #005983;
+  font-family: "glyphicons halflings";
+  font-size: 16px;
+  line-height: 1;
+  display: block;
+  height: auto;
+  left: 1px;
+  padding: 16px 17px;
+  position: absolute;
+  top: 1px;
+  width: 16px;
+  z-index: 10;
+}
+#login_register form input[type="submit"],
+#login_register form input[type="button"],
+#login_register form button,
+#login_register form a.button {
+  background: #c8c8c8;
+  border: 1px solid #b4b4b4;
+  box-shadow: none;
+  border-radius: 4px;
+  color: #fff!important;
+  display: block;
+  font: 18px/1 "CalibreWeb-Medium",san-serif;
+  height: 50px;
+  margin: 0 auto;
+  opacity: 1!important;
+  padding: 12px;
+  text-align: center;
+  text-shadow: none!important;
+  transition: none;
+  text-transform: uppercase;
+  max-width: 100%;
+  width: 100%;
+}
+#login_register form input[type="submit"].enabled,
+#login_register form input[type="button"].enabled,
+#login_register form button.enabled,
+#login_register form a.button.enabled {
+  background: #005983;
+  border-color: #005983;
+}
+#login_register form input[type="submit"].enabled:hover,
+#login_register form input[type="submit"].enabled:focus,
+#login_register form input[type="button"].enabled:hover,
+#login_register form input[type="button"].enabled:focus,
+#login_register form button.enabled:hover,
+#login_register form button.enabled:focus,
+#login_register form a.button.enabled:hover,
+#login_register form a.button.enabled:focus {
+  background: #29a7de;
+  border-color: #1c88b8;
+  box-shadow: none!important;
+  outline: none!important;
+}
+#login_register .login-card form .login-content .login-forgot{
+  margin: 20px 0 0;
+}
+#login_register .login-card form .login-content .login-forgot .right,
+#login_register .login-card form .login-content .login-forgot .left {
+  display: inline-block;
+  width: 45%;
+  float: left;
+}
+#login_register .login-card form .login-content .login-forgot .left {
+  border-right: 2px solid #dcdcdc;
+  margin-right: -2px;
+  padding-right: 5%;
+}
+#login_register .login-card form .login-content .login-forgot .right {
+  padding-left: 5%;
+}
+#login_register .login-card form .login-content .login-forgot p {
+  font: normal 13px/20px "CalibreWeb-Light";
+}
+#login_footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #29a7de;
+  color: #fff;
+  padding: 20px 15px;
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+}
+#login_footer ul {
+  list-style: none outside none;
+  font: 14px/16px "CalibreWeb-Light";
+}
+#login_footer ul li {
+  border-right: 1px solid #fff;
+  display: inline-block;
+  padding: 0 18px;
+}
+#login_footer ul li:last-child {
+  border-right: none;
+}
+#login_footer a {
+  color: #fff;
+  font-family: "CalibreWeb-Light";
+}
+
+</style>
+</body>
+</html>

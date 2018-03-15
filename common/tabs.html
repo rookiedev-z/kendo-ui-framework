@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UI元素 > Tabs | UI2.0</title>
+
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div id="_main_layout" class="gray-bg">
+    <div class="row page-heading border-bottom white-bg">
+      <div class="col-lg-12">
+        <h2 class="page-title fn-text-center">
+          UI元素 <small>Tabs</small>
+        </h2>
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">UI元素</a></li>
+          <li class="active"><a>Tabs</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="tabstrip1" class="wrapper-content no-borders">
+            <ul>
+                <li class="k-state-active">Tab 1</li>
+                <li>Tab 2</li>
+            </ul>
+            <div>
+              <strong>tabPostion</strong><span class="text-muted"> String (default: "top") </span><br><br>
+              Specifies the position of the widget tabs. Valid values are "top" (default), "left", "right" and "bottom". <br>
+              A fade animation is highly recommended with any of the non-default tab position settings....<br><br>
+              <strong>collapsible</strong><span class="text-muted"> Boolean (default: false)</span><br><br>
+              Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.<br><br>
+            </div>
+            <div>
+              <strong>scrollable</strong><span class="text-muted"> Boolean | object</span> <br><br>
+              If enabled, the TabStrip will display buttons that will scroll the tabs horizontally, when they cannot fit the TabStrip width. By default scrolling is enabled.<br>
+              The feature requires "top" or "bottom" tabPosition.<br><br>
+              Unless disabled, scrollable must be set to a JavaScript object, which represents the scrolling configuration.<br><br>
+              See Scrollable Tabs for more information....<br><br>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div id="tabstrip2" class="wrapper-content no-borders">
+            <ul>
+                <li class="k-state-active"><i class="iconfont icon-gongxian m-l m-r"></i></li>
+                <li><i class="iconfont icon-jiankong m-l m-r"></i></li>
+            </ul>
+            <div>
+              <strong>animation</strong><span class="text-muted"> Object |Boolean</span><br><br>
+              A collection of visual animations used when TabStrip tab are selected through user interactions. <br><br>
+              Setting this option to false will disable all animations.<br><br>
+              <strong>animation.close</strong><span class="text-muted"> Object</span><br><br>
+              The visual animation(s) that will be used when the current tab is closed.<br><br>
+            </div>
+            <div>
+              <strong>dataSource</strong><span class="text-muted"> Object |Array |kendo.data.DataSource</span><br><br>
+              The data source of the widget which is used to display the items. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource instance.<br><br>
+              If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.<br><br>
+              If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.<br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="tabstrip3" class="wrapper-content no-borders">
+            <ul>
+                <li class="k-state-active">Tab 1</li>
+                <li>Tab 2</li>
+            </ul>
+            <div>
+              <strong>dataTextField</strong><span class="text-muted"> String (default: "")</span><br><br>
+              Sets the field of the data item that provides the text name of the tab. <br><br>
+              <strong>dataUrlField</strong><span class="text-muted"> String (default: "")</span><br><br>
+              Sets the field of the data item that provides the link URL for the tab.<br><br>
+              <strong>navigatable</strong><span class="text-muted"> Boolean (default: true)</span><br><br>
+              Specifies whether the TabStrip should be keyboard navigatable.<br><br>
+            </div>
+            <div>
+              <strong>属性：tabGroup</strong><span class="text-muted"> jQuery</span><br><br>
+              The jQuery object which contains the TabStrip items.<br><br>
+              <strong>方法：activeTab</strong><br><br>
+              Activates a tab specified as a selector. Note: Invoking this method will not trigger any events.<br><br>
+              <strong>方法：append</strong><br><br>
+              Appends a tab to the collection of tabs in a TabStrip.<br><br>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div id="tabstrip4" class="wrapper-content no-borders">
+            <ul>
+                <li class="k-state-active">Tab 1</li>
+                <li>Ajax Tab</li>
+            </ul>
+            <div>
+              <strong>insertAfter</strong><br><br>
+              Inserts a newly-created tab after a specified tab.<br><br>
+              PARAMETERS<br>
+              item <span class="text-muted">Array |Object |String |Element |jQuery</span><br><br>
+              referenceTab <span class="text-muted">String |Element |jQuery</span><br>
+              A reference tab to insert the new item after.<br><br>
+              RETURNS<br>
+              kendo.ui.TabStrip Returns the TabStrip object to support chaining.<br><br>
+            </div>
+            <div>
+              <strong>setDataSource</strong><br><br>
+              Sets the dataSource of an existing tabstrip and rebinds it.<br><br>
+              PARAMETERS<br>
+              dataSource Object |Array |kendo.data.DataSource<br><br>
+              <strong>destroy</strong><br><br>
+              Prepares the TabStrip for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.<br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mainly scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+  <!-- Custom scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.tabstrip.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("#tabstrip1").kendoTabStrip({
+        animation: false
+      });
+      $("#tabstrip2").kendoTabStrip({
+        tabPosition:"bottom",
+        animation: false
+      });
+      $("#tabstrip3").kendoTabStrip({
+        tabPosition: "left",
+        animation: false
+      });
+      $("#tabstrip4").kendoTabStrip({
+        tabPosition: "right",
+        animation: false
+      });
+    });
+  </script>
+
+</body>
+
+</html>

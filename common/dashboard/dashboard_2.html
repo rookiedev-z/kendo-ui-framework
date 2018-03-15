@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>仪表盘 - Data</title>
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+
+</head>
+
+<body class="ui-gray-bg">
+  <div class="row border-bottom">
+    <nav class="navbar navbar-static-top white-bg" style="margin-bottom: 0">
+      <div class="pull-left">
+        <a class="navbar-minimalize k-button btn-primary"><i class="iconfont icon-caidanfenpei"></i> </a>
+        <!-- <form role="search" class="navbar-form-custom" action="search_results.html">
+          <div class="form-group no-margins">
+            <input type="text" placeholder="Search for something..." class="k-textbox" name="top-search" id="top-search">
+          </div>
+        </form> -->
+      </div>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+          <span class="m-r-sm text-muted welcome-message">Welcome to UI 2.0.</span>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle count-info" data-toggle="dropdown" href="dashboard_2.html#">
+            <i class="iconfont icon-mail"></i> <span class="label-tag label-warning">16</span>
+          </a>
+          <ul class="dropdown-menu dropdown-messages pull-right">
+            <li>
+              <div>
+                <small class="pull-right">46h ago</small>
+                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+              </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <div class="text-center block">
+                <a class="k-button btn-link" href="notifications.html">
+                  <strong>Read All Messages</strong>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle count-info" data-toggle="dropdown" href="dashboard_2.html#">
+            <i class="iconfont icon-alarm"></i> <span class="label-tag label-primary">8</span>
+          </a>
+          <ul class="dropdown-menu dropdown-alerts pull-right">
+            <li>
+                <a href="mailbox.html">
+                    <div>
+                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                        <span class="pull-right text-muted small">4 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="profile.html">
+                <div>
+                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                    <span class="pull-right text-muted small">12 minutes ago</span>
+                </div>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="grid_options.html">
+                <div>
+                  <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                  <span class="pull-right text-muted small">4 minutes ago</span>
+                </div>
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <div class="text-center block">
+                <a class="k-button btn-link" href="notifications.html">
+                  <strong>See All Alerts</strong>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="login.html">
+            <i class="iconfont icon-logout"></i> 退出
+          </a>
+        </li>
+      </ul>
+
+    </nav>
+  </div>
+
+  <div class="wrapper">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Overview</h5>
+        <div class="pull-right">
+          <div class="btn-group">
+            <button type="button" class="k-button btn-xs btn-white active">Today</button>
+            <button type="button" class="k-button btn-xs btn-white">Monthly</button>
+            <button type="button" class="k-button btn-xs btn-white">Annual</button>
+          </div>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-xs-9">
+            <div id="dashboard_line_chart" style="width:100%;height:230px"></div>
+          </div>
+          <div class="col-xs-3">
+            <ul class="stat-list m">
+              <li class="m-b">
+                <h2 class="no-margins font-noraml">2,346</h2>
+                <small>Total orders in period</small>
+                <div class="stat-percent pull-right">48% <i class="iconfont icon-levelup text-navy"></i></div>
+                <div class="dose-rate-wrap">
+                  <div class="dose-rate-progressbar" value="48"></div>
+                </div>
+              </li>
+              <li class="m-b">
+                <h2 class="no-margins font-noraml">4,422</h2>
+                <small>Orders in last month</small>
+                <div class="stat-percent pull-right">60% <i class="iconfont icon-leveldown text-navy"></i></div>
+                <div class="dose-rate-wrap">
+                  <div class="dose-rate-progressbar" value="60"></div>
+                </div>
+              </li>
+              <li class="m-b">
+                <h2 class="no-margins font-noraml">9,180</h2>
+                <small>Monthly income from orders</small>
+                <div class="stat-percent pull-right">22% <i class="iconfont icon-leveldown text-navy"></i></div>
+                <div class="dose-rate-wrap">
+                  <div class="dose-rate-progressbar" value="22"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ibox">
+      <div class="ibox-content p-n">
+        <div id="tabstrip">
+          <ul>
+            <li>统计</li>
+            <li>信息</li>
+            <li>相关照片</li>
+            <li>其他</li>
+          </ul>
+          <div id="tab1" style="height:500px">
+            <iframe class="k-content-frame" src="../../common/dialog/user_select.html"></iframe>
+          </div>
+          <div id="tab2" style="height:400px">
+            <iframe class="k-content-frame" src="../../common/dialog/info_2column.html"></iframe>
+          </div>
+          <div id="tab3">
+            <ul id="listview" class="row"></ul>
+            <script id="listview-template" type="x-kendo-template">
+              <li class="col-xs-6 col-md-4 col-lg-2">
+                <figure>
+                  <img src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/imgs/photos/#= id #.jpg" class="img-responsive" />
+                  <figcaption class="hidden-xs">
+                    <h4>#: title #</h4>
+                    <p class="hidden-sm">
+                      #: description #
+                    </p>
+                  </figcaption>
+                </figure>
+              </li>
+            </script>
+            <style>
+            #listview {
+              list-style-type: none;
+              padding: 0 0 15px;
+              border: 0;
+            }
+            #listview figure {
+              border: 1px solid #e7e7e7;
+              border-radius: 3px;
+              padding: 5px;
+              margin: 15px 10px 5px 10px;
+            }
+            figure h4 {
+              font-size: 1.15em;
+            }
+            figure p.hidden-sm {
+              min-height: 80px;
+            }
+            .img-responsive {
+              display: block;
+              height: auto;
+              max-width: 100%;
+            }
+            </style>
+          </div>
+          <div id="tab4">
+            其他说明<br>
+            描述信息描其他说明文字述信，其他说明文字息描述信息描述。信息其他说明文字其他说明文字其他说明文字，其他说明文字。<br>
+            其他说明文字息描述信息描述。信息其他说明文字其他说明文字其他说明文字。<br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mainly scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+  <!-- Custom scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/main.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/dropdown.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.tabstrip.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.listview.min.js"></script>
+  <script>
+    $(function() {
+
+      var tabstrip;
+      var createTabStrip = function () {
+          tabstrip = $("#tabstrip").kendoTabStrip({
+              animation: false
+          }).data("kendoTabStrip");
+      };
+
+      $(".dose-rate-progressbar").each(function (idx, it) {
+        $(it).kendoProgressBar({
+          type: "percent"
+        }).data("kendoProgressBar").value(Number($(it).attr("value")))
+      });
+
+      var configureSortable = function () {
+          $("#tabstrip ul.k-tabstrip-items").kendoSortable({
+              filter: "li.k-item",
+              axis: "x",
+              container: "ul.k-tabstrip-items",
+              hint: function (element) {
+                  return $("<div id='hint' class='k-widget k-header k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-state-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
+              },
+              start: function (e) {
+                  tabstrip.activateTab(e.item);
+              },
+              change: function (e) {
+                  var tabstrip = $("#tabstrip").data("kendoTabStrip"),
+                      reference = tabstrip.tabGroup.children().eq(e.newIndex);
+
+                  if (e.oldIndex < e.newIndex) {
+                      tabstrip.insertAfter(e.item, reference);
+                  } else {
+                      tabstrip.insertBefore(e.item, reference);
+                  }
+              }
+          });
+      };
+
+      var configureCloseTab = function () {
+          var tabsElements = $('#tabstrip li[role="tab"]');
+          tabsElements.append('<span data-type="remove" class="k-link"><span class="k-icon k-font-icon k-i-x"></span></span>');
+
+          tabstrip.tabGroup.on("click", "[data-type='remove']", function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              var item = $(e.target).closest(".k-item");
+              tabstrip.remove(item.index());
+
+              if (tabstrip.items().length > 0 && item.hasClass('k-state-active')) {
+                  tabstrip.select(0);
+              }
+          });
+      };
+
+      createTabStrip();
+      configureSortable();
+      tabstrip.select(0);
+      configureCloseTab();
+
+      $("#listview").kendoListView({
+        dataSource: {
+          data: [
+            { id: 1, title: "Sunrise", description: "And what a great July morning it was..." },
+            { id: 2, title: "Fisherman", description: "Fishing on the north shore" },
+            { id: 3, title: "Green Forest", description: "Summer is everywhere" },
+            { id: 4, title: "Cactus", description: "A yellow one..." },
+            { id: 5, title: "Moss", description: "Nice mossy green" },
+            { id: 7, title: "Country Road", description: "On my way home" },
+            { id: 8, title: "Bloom", description: "Cherry blossoms in full bloom" },
+            { id: 9, title: "San Francisco", description: "San Francisco by sunset" },
+            { id: 12, title: "Leafs", description: "Autumn leafs on the patio" }
+          ]
+        },
+        template: $("#listview-template").html()
+      });
+
+    });
+  </script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/plugins/echart/echarts.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/echart/theme/custom.macarons.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/echart_demo.js"></script>
+</body>
+
+</html>

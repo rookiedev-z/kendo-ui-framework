@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>子系统入口 | UI2.0</title>
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <!-- Custom scripts -->
+  <!-- <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet"> -->
+  <style type="text/css">
+  html,body {
+    height:100%;
+  }
+  body{
+  	font:12px/22px Verdana,Arial,sans-serif,"Times New Roman",宋体;
+  	text-align:center;
+  	min-width:830px;
+  	color: #676a6c;
+  }
+  * {
+    box-sizing: border-box;
+    margin:0; padding:0;
+  }
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
+  .fusion-portfolio-content-wrapper .fusion-image-wrapper {
+    opacity: 1;
+  }
+  .fusion-portfolio-1 .fusion-portfolio-wrapper .fusion-col-spacing {
+    padding: 0px;
+  }
+  .fusion-portfolio-three .fusion-portfolio-post {
+      width: 33.33%;
+  }
+  .fusion-portfolio-post {
+      float: left;
+  }
+  .wp-caption, img, object {
+    max-width: 100%;
+  }
+  .fusion-image-wrapper {
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+  }
+  .fusion-image-wrapper img {
+    vertical-align: top;
+    height: auto;
+  }
+  .fusion-image-wrapper .fusion-rollover {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100.1%;
+    height: 100.1%;
+    line-height: normal;
+    text-align: center;
+    background-image: linear-gradient(to top,#aad75d,#d1e990);
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    transition: all .3s ease-in-out;
+    -webkit-transform-style: preserve-3d;
+
+    background-image: linear-gradient(top,rgba(103,150,191,0.85) 0,#6796bf 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(103,150,191,0.85)),color-stop(1,#6796bf));
+    background-image: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#6796bf,endColorstr=#6796bf),alpha(opacity=0);
+    background-image: -webkit-linear-gradient(top,rgba(103,150,191,0.85) 0,#6796bf 100%);
+    background-image: -moz-linear-gradient(top,rgba(103,150,191,0.85) 0,#6796bf 100%);
+    background-image: -ms-linear-gradient(top,rgba(103,150,191,0.85) 0,#6796bf 100%);
+    background-image: -o-linear-gradient(top,rgba(103,150,191,0.85) 0,#6796bf 100%);
+    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
+  }
+  .fusion-image-wrapper .fusion-rollover:before {
+    display: inline-block;
+    content: '';
+    vertical-align: middle;
+    height: 100%;
+  }
+  .fusion-image-wrapper:hover .fusion-rollover {
+    opacity: 1;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#6796bf,endColorstr=#6796bf),alpha(opacity=100);
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    -o-transform: scaleX(1);
+  }
+  .fusion-rollover-content {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px;
+    height: auto;
+    width: 90%;
+  }
+  .fusion-image-wrapper .fusion-rollover .fusion-rollover-content a {
+    font-family: Raleway,Arial,Helvetica,sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .fusion-image-wrapper .fusion-rollover .fusion-rollover-gallery, .fusion-image-wrapper .fusion-rollover .fusion-rollover-link {
+    display: inline-block;
+    opacity: .9;
+    position: relative;
+    vertical-align: middle;
+    margin: 0;
+    text-indent: -10000px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    background-color: rgba(0,0,0,.65);
+    width: 48px;
+    height: 48px;
+  }
+  .fusion-image-wrapper .fusion-rollover .fusion-rollover-gallery>.iconfont, .fusion-image-wrapper .fusion-rollover .fusion-rollover-link>.iconfont {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    text-indent: 0;
+    text-shadow: none;
+    font-size: 20px;
+    line-height: 2.41;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  .fusion-image-wrapper .fusion-rollover .fusion-rollover-content .fusion-rollover-title {
+    font-family: Raleway,Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.33;
+    letter-spacing: 0;
+    margin: 10px 0 3px 0;
+  }
+  .fusion-image-wrapper .fusion-rollover .fusion-rollover-content .fusion-rollover-title,
+  .fusion-image-wrapper .fusion-rollover .fusion-rollover-content .fusion-rollover-categories a {
+    color: rgba(0,0,0,.65);
+  }
+  </style>
+</head>
+<body>
+  <div class="fusion-fullwidth" style='background-color: rgba(255,255,255,0);background-position: left top;background-repeat: no-repeat;padding:0px;'>
+    <div class="fusion-builder-row fusion-row ">
+      <div class="fusion-layout-column" style='margin-top:0px;margin-bottom:0px;'>
+        <div class="fusion-column-wrapper">
+          <div class="fusion-recent-works fusion-portfolio fusion-portfolio-1 fusion-portfolio-grid fusion-portfolio-paging-none fusion-portfolio fusion-portfolio-three fusion-portfolio-unboxed fusion-no-col-space" data-columns="three">
+            <div class="fusion-portfolio-wrapper" id="fusion-portfolio-1" style="margin:-0px;">
+              <article class="fusion-portfolio-post branding graphic-design wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/ad_1.jpg" class="attachment-full size-full wp-post-image" alt="ad_1" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/ad_1.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 内部站点 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">介绍</a>,
+                          <a href="javascript:void(0)" rel="tag">新闻</a>,
+                          <a href="javascript:void(0)" rel="tag">事件</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design mobile wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/mobile_1.jpg" class="attachment-full size-full wp-post-image" alt="mobile_1" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/mobile_1.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 手机系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">手机端</a>,
+                          <a href="javascript:void(0)" rel="tag">操作</a>,
+                          <a href="javascript:void(0)" rel="tag">APP</a>,
+                          <a href="javascript:void(0)" rel="tag">监控</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/logo.jpg" class="attachment-full size-full wp-post-image" alt="logo" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/logo.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4	class="fusion-rollover-title"> <a href="javascript:void(0)"> 宣传系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">系统描述</a>,
+                          <a href="javascript:void(0)" rel="tag">技术亮点</a>,
+                          <a href="javascript:void(0)" rel="tag">解决方案</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design mobile wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/papers_1.jpg" class="attachment-full size-full wp-post-image" alt="papers_1" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/papers_1.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4	class="fusion-rollover-title"> <a href="javascript:void(0)"> 文档系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">月报</a>,
+                          <a href="javascript:void(0)" rel="tag">年报</a>,
+                          <a href="javascript:void(0)" rel="tag">规章</a>,
+                          <a href="javascript:void(0)" rel="tag">AA文档</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/controls.jpg" class="attachment-full size-full wp-post-image" alt="controls" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/controls.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)" target="_blank"> 控制系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">控制</a>,
+                          <a href="javascript:void(0)" rel="tag">操作</a>,
+                          <a href="javascript:void(0)" rel="tag">监控</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post graphic-design mobile wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/macbook_1.jpg" class="attachment-full size-full wp-post-image" alt="macbook_1" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/macbook_1.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 报表分析系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">报表</a>,
+                          <a href="javascript:void(0)" rel="tag">数据分析</a>,
+                          <a href="javascript:void(0)" rel="tag">统计</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design mobile wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/papercards.jpg" class="attachment-full size-full wp-post-image" alt="papercards" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/papercards.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 某某子系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">标签1</a>,
+                          <a href="javascript:void(0)" rel="tag">标签2</a>,
+                          <a href="javascript:void(0)" rel="tag">标签3</a>,
+                          <a href="javascript:void(0)" rel="tag">标签4</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design mobile wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper"> <img width="1170" height="700" src="imgs/icon.jpg" class="attachment-full size-full wp-post-image" alt="icon" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/icon.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 资源系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">文档</a>,
+                          <a href="javascript:void(0)" rel="tag">图片</a>,
+                          <a href="javascript:void(0)" rel="tag">报表</a>,
+                          <a href="javascript:void(0)" rel="tag">其他</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design mobile fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/cd_1.jpg" class="attachment-full size-full wp-post-image" alt="cd_1" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/cd_1.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 其他安装服务 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">应用</a>,
+                          <a href="javascript:void(0)" rel="tag">数据库</a>,
+                          <a href="javascript:void(0)" rel="tag">JDK</a>,
+                          <a href="javascript:void(0)" rel="tag">分布式服务</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post branding graphic-design wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/logo.jpg" class="attachment-full size-full wp-post-image" alt="logo" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/logo.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4	class="fusion-rollover-title"> <a href="javascript:void(0)"> 宣传系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">系统描述</a>,
+                          <a href="javascript:void(0)" rel="tag">技术亮点</a>,
+                          <a href="javascript:void(0)" rel="tag">解决方案</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="fusion-portfolio-post graphic-design mobile wordpress-2 fusion-col-spacing">
+                <div class="fusion-portfolio-content-wrapper">
+                  <div class="fusion-image-wrapper">
+                    <img width="1170" height="700" src="imgs/macbook_1.jpg" class="attachment-full size-full wp-post-image" alt="macbook_1" />
+                    <div class="fusion-rollover">
+                      <div class="fusion-rollover-content">
+                        <a class="fusion-rollover-link" href="javascript:void(0)" title="Permalink" target="_blank"><i class="iconfont icon-link"></i></a>
+                        <a class="fusion-rollover-gallery" href="imgs/macbook_1.jpg" title="Gallery"><i class="iconfont icon-sousuo"></i></a>
+                        <h4 class="fusion-rollover-title"> <a href="javascript:void(0)"> 报表分析系统 </a></h4>
+                        <div class="fusion-rollover-categories">
+                          <a href="javascript:void(0)" rel="tag">报表</a>,
+                          <a href="javascript:void(0)" rel="tag">数据分析</a>,
+                          <a href="javascript:void(0)" rel="tag">统计</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="fusion-clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(function() {
+
+    })
+  </script>
+</body>
+
+</html>

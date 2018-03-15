@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Grid > Search | UI2.0</title>
+
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="_main_layout" class="gray-bg">
+    <div>
+      <div class="row page-heading border-bottom white-bg">
+        <div class="col-lg-12">
+          <h2 class="page-title fn-text-center">
+            数据列表
+            <small>Search list</small>
+          </h2>
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">数据列表</a></li>
+            <li class="active"><a>查询列表</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>Grid查询列表（#search_form）</h5>
+                <div class="ibox-tools">
+                  <a><i class="iconfont icon-xiugai"></i></a>
+                </div>
+              </div>
+              <div class="ibox-content">
+                <form id="search_form">
+                  <table class="form-table">
+                    <tr>
+                      <td class="label">用户姓名：</td>
+                      <td>
+                        <input type="text" name="condition.fuzzyName" class="k-textbox">
+                      </td>
+                      <td class="label">登录名：</td>
+                      <td>
+                        <input type="text" name="condition.fuzzyUsername" class="k-textbox" value="">
+                      </td>
+                      <td class="label">电子邮箱：</td>
+                      <td>
+                        <input type="text" name="condition.fuzzyEmail" class="k-textbox">
+                      </td>
+                      <td class="label">用户状态：</td>
+                      <td>
+                        <select name="condition.status" id="user_status" style="width:180px"></select>
+                      </td>
+                      <td rowspan="2"></td>
+      								<td rowspan="2" width="100" valign="top" align="right">
+      									<button type="submit" class="k-button btn-primary">查 询</button>
+      								</td>
+                    </tr>
+                    <tr>
+                      <td class="label">手机号码：</td>
+                      <td>
+                        <input type="text" name="condition.phone" class="k-textbox">
+                      </td>
+                      <td class="label">证件号码：</td>
+                      <td>
+                        <input type="text" name="condition.certificateNumber" class="k-textbox">
+                      </td>
+                      <td class="label">联系地址：</td>
+                      <td colspan="3" width="400">
+                        <input type="text" name="condition.address" class="k-textbox">
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+                <div id="grid"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mainly scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+  <!-- Custom scripts -->
+
+  <script type="text/javascript">
+
+   var USER_STATUS = [{"code":"NORMAL","dictionaryCode":"USER_STATUS","id":1000001,"name":"正常","sort":99},{"code":"BLOCKED","dictionaryCode":"USER_STATUS","id":1000002,"name":"禁止","sort":90},{"code":"LOCKED","dictionaryCode":"USER_STATUS","id":1000003,"name":"锁定","sort":80},{"code":"EXCESSIVE_ATTEMPTS","dictionaryCode":"USER_STATUS","id":1000004,"name":"过多尝试","sort":70},{"code":"EXPIRED_CREDENTIALS","dictionaryCode":"USER_STATUS","id":1000005,"name":"密码过期","sort":60},{"code":"DELETED","dictionaryCode":"USER_STATUS","id":1000006,"name":"已删除","sort":0}];
+
+   function getUserStatusName(code) {
+     var name;
+     $.each(USER_STATUS, function(idx, it) {
+       if(it.code == code) {
+         name = it.name;
+       }
+     });
+     return name;
+   }
+
+  $(function() {
+    $("#_main_layout").kendoSplitter({
+      orientation: "vertical",
+      panes: [{
+        collapsible: false,
+        resizable: false,
+        scrollable: false,
+        size: "110px"
+      }, {
+        collapsible: false
+      }]
+    });
+
+    $("#user_status").kendoDropDownList({
+        dataTextField: "name",
+        dataValueField: "code",
+        optionLabel: "选择状态",
+        dataSource: {
+            transport: {
+                read: {
+                    // url: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/user_status.json",
+                    url: "../../data/user_status.json",
+                    dataType: "json"
+                }
+            }
+        }
+    });
+
+    $("#grid").kendoExtGrid({
+      entityName: "user",
+      scrollable: true,
+      // dataURL: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/users.json",
+      dataURL: "../../data/users.json",
+      requestType: "GET",
+      height:400,
+      views: {
+        "add": {
+          name: "",
+          tooltip: "新增+",
+          url: "/usercenter/user/add",
+          width: 500,
+          height: 500
+        },
+        "edit": {
+          name: "",
+          url: "/usercenter/user/edit",
+          width: 500,
+          height: 500
+        },
+        "delete": {
+          name: "",
+          url: "/usercenter/user/delete"
+        }
+      },
+      toolbarButtons: [
+        "create", "modify", "delete",
+        {
+          id: "upload_btn",
+          name: "",
+          tooltip: "上传文件",
+          icon: "iconfont icon-upload",
+          onclick: function(grid, btn) {
+            alert("上传文件。。。")
+          }
+        }
+      ],
+      columns: [{
+        width: 150,
+        title: "登录名",
+        template: "<a href='javascript:void(0)' title='查看#: name #的详细信息' onclick=\"dialog('dlg_user_view','查看#:name #的信息','/usercenter/user/view?id=#: id #',600,400)\">#: username #</a>",
+        field: "username"
+      }, {
+        width: 120,
+        title: "手机号码",
+        field: "phone",
+        attributes: {
+          style: "text-align: center"
+        }
+      }, {
+        width: 100,
+        title: "用户姓名",
+        field: "name"
+      }, {
+        width: 180,
+        title: "电子邮箱",
+        field: "email"
+      }, {
+        field: "ownedRoles",
+        title: "所属角色",
+        width: 200,
+        template: "# if(data.ownedRoles){for(var i=0;i<data.ownedRoles.length;i++){var role=data.ownedRoles[i].name;var rolename=data.ownedRoles[i].name;if(i>0){# , # } # <a href=\"javascript:void(0)\" title=\"查看#: rolename #的详细信息\" onclick=\"dialog('dlg_role_view','查看#:rolename #的信息','/usercenter/role/view?id=#: data.ownedRoles[i].id #',480,280)\"> #:role #</a> #}} #"
+      }, {
+        field: "lastLoggedIn",
+        width: 150,
+        title: "最后登录",
+        // template: "# if(data.lastLoggedIn){ # #: kendo.toString(new Date(lastLoggedIn), 'yyyy-MM-dd HH:mm:ss') # #}#"
+      }, {
+        field: "status",
+        width: 100,
+        title: "状态",
+        // template: " # var statusComponent = $('\\#user_status').data('kendoDropDownList');if(statusComponent){# #=statusComponent.dataSource.get(data.status).name# #} #"
+        template: "# var statusName = getUserStatusName(data.status); if(statusName){ #  #=statusName#  #}#"
+      }, {
+        title: "备注",
+        field: "description",
+        // width: 150,
+        attributes: {
+          "class": "single-line"
+        }
+      }, {
+        hidden: true,
+        field: "id"
+      }]
+    });
+
+  });
+  </script>
+</body>
+
+</html>

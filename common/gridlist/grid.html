@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Grid > Basic | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/dropdown.js"></script>
+
+</head>
+
+<body>
+  <div id="_main_layout" class="gray-bg">
+    <div>
+      <div class="row page-heading border-bottom white-bg">
+        <div class="col-lg-12">
+          <h2 class="page-title fn-text-center">
+            数据列表
+            <small>Basic grid</small>
+          </h2>
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">数据列表</a></li>
+            <li class="active"><a>基础Grid</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>Grid基础使用（toolbarButtons、cell template &amp; attributes 使用）</h5>
+                <div class="ibox-tools">
+                  <a><i class="iconfont icon-xiugai"></i></a>
+                </div>
+              </div>
+              <div class="ibox-content">
+                <div id="grid"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+
+   var USER_STATUS = [{"code":"NORMAL","dictionaryCode":"USER_STATUS","id":1000001,"name":"正常","sort":99},{"code":"BLOCKED","dictionaryCode":"USER_STATUS","id":1000002,"name":"禁止","sort":90},{"code":"LOCKED","dictionaryCode":"USER_STATUS","id":1000003,"name":"锁定","sort":80},{"code":"EXCESSIVE_ATTEMPTS","dictionaryCode":"USER_STATUS","id":1000004,"name":"过多尝试","sort":70},{"code":"EXPIRED_CREDENTIALS","dictionaryCode":"USER_STATUS","id":1000005,"name":"密码过期","sort":60},{"code":"DELETED","dictionaryCode":"USER_STATUS","id":1000006,"name":"已删除","sort":0}];
+
+   function getUserStatusName(code) {
+     var name;
+     $.each(USER_STATUS, function(idx, it) {
+       if(it.code == code) {
+         name = it.name;
+       }
+     });
+     return name;
+   }
+
+  $(function() {
+    $("#_main_layout").kendoSplitter({
+      orientation: "vertical",
+      panes: [{
+        collapsible: false,
+        resizable: false,
+        scrollable: false,
+        size: "110px"
+      }, {
+        collapsible: false
+      }]
+    });
+
+    $("#grid").kendoExtGrid({
+      entityName: "user",
+      scrollable: true,
+      // dataURL: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/users.json",
+      dataURL: "../../data/users.json",
+      requestType: "GET",
+      height:400,
+      views: {
+        "add": {
+          name: "",
+          tooltip: "新增+",
+          url: "/usercenter/user/add",
+          width: 500,
+          height: 500
+        },
+        "edit": {
+          name: "",
+          url: "/usercenter/user/edit",
+          width: 500,
+          height: 500
+        },
+        "delete": {
+          name: "",
+          url: "/usercenter/user/delete"
+        }
+      },
+      toolbarButtons: [
+        "create", "modify", "delete",
+        {
+          id: "upload_btn",
+          name: "",
+          tooltip: "上传文件",
+          icon: "iconfont icon-upload",
+          onclick: function(grid, btn) {
+            alert("上传文件。。。")
+          }
+        }
+      ],
+      columns: [{
+        width: 150,
+        title: "登录名",
+        template: "<a href='javascript:void(0)' title='查看#: name #的详细信息' onclick=\"dialog('dlg_user_view','查看#:name #的信息','/usercenter/user/view?id=#: id #',600,400)\">#: username #</a>",
+        field: "username"
+      }, {
+        width: 120,
+        title: "手机号码",
+        field: "phone",
+        attributes: {
+          style: "text-align: center"
+        }
+      }, {
+        width: 100,
+        title: "用户姓名",
+        field: "name"
+      }, {
+        width: 180,
+        title: "电子邮箱",
+        field: "email"
+      }, {
+        field: "ownedRoles",
+        title: "所属角色",
+        width: 200,
+        template: "# if(data.ownedRoles){for(var i=0;i<data.ownedRoles.length;i++){var role=data.ownedRoles[i].name;var rolename=data.ownedRoles[i].name;if(i>0){# , # } # <a href=\"javascript:void(0)\" title=\"查看#: rolename #的详细信息\" onclick=\"dialog('dlg_role_view','查看#:rolename #的信息','/usercenter/role/view?id=#: data.ownedRoles[i].id #',480,280)\"> #:role #</a> #}} #"
+      }, {
+        field: "lastLoggedIn",
+        width: 150,
+        title: "最后登录",
+        // template: "# if(data.lastLoggedIn){ # #: kendo.toString(new Date(lastLoggedIn), 'yyyy-MM-dd HH:mm:ss') # #}#"
+      }, {
+        field: "status",
+        width: 100,
+        title: "状态",
+        // template: " # var statusComponent = $('\\#user_status').data('kendoDropDownList');if(statusComponent){# #=statusComponent.dataSource.get(data.status).name# #} #"
+        template: "# var statusName = getUserStatusName(data.status); if(statusName){ #  #=statusName#  #}#"
+      }, {
+        title: "备注",
+        field: "description",
+        // width: 150,
+        attributes: {
+          "class": "single-line"
+        }
+      }, {
+        hidden: true,
+        field: "id"
+      }]
+    });
+
+    });
+  </script>
+</body>
+
+</html>

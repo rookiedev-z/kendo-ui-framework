@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Photos | UI2.0</title>
+
+  <!-- Basic css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <!-- Custom css -->
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="_main_layout" class="gray-bg">
+    <div>
+      <div class="row border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+          <h2 class="page-title fn-text-center">
+            Photos <small>Kendo UI ListView</small>
+          </h2>
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">App Views</a></li>
+            <li class="active"><a>List View</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="wrapper">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>最新照片 | kendo UI - ListView</h5>
+            <div class="ibox-tools">
+              <a class="collapse-link"><i class="iconfont icon-chevronup"></i></a>
+              <a class="collapse-link"><i class="iconfont icon-xiugai"></i></a>
+              <a class="close-link"><i class="iconfont icon-cuowu"></i></a>
+            </div>
+          </div>
+          <div class="ibox-content">
+            <ul id="listview" class="row no-borders"></ul>
+            <script id="listview-template" type="x-kendo-template">
+              <li class="col-xs-6 col-md-4 col-lg-2">
+                <figure>
+                  <img src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/imgs/photos/#= id #.jpg" class="img-responsive" />
+                  <figcaption class="hidden-xs">
+                    <h4>#: title #</h4>
+                    <p class="hidden-sm">
+                      #: description #
+                    </p>
+                  </figcaption>
+                </figure>
+              </li>
+            </script>
+            <style>
+            #listview {
+              list-style-type: none;
+              padding: 0 0 15px;
+            }
+            #listview figure {
+              border: 1px solid #e7e7e7;
+              border-radius: 3px;
+              padding: 5px;
+              margin: 15px 10px 5px 10px;
+            }
+            figure h4 {
+              font-size: 1.15em;
+            }
+            figure p.hidden-sm {
+              min-height: 80px;
+            }
+            .img-responsive {
+              display: block;
+              height: auto;
+              max-width: 100%;
+            }
+            </style>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Mainly scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+  <!-- Custom scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/js/main.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.listview.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("#_main_layout").kendoSplitter({
+        orientation: "vertical",
+        panes: [{
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: "110px"
+        }, {
+          collapsible: false
+        }]
+      });
+      $("#listview").kendoListView({
+        dataSource: {
+          data: [
+            { id: 1, title: "Sunrise", description: "And what a great July morning it was..." },
+            { id: 2, title: "Fisherman", description: "Fishing on the north shore" },
+            { id: 3, title: "Green Forest", description: "Summer is everywhere" },
+            { id: 4, title: "Cactus", description: "A yellow one..." },
+            { id: 5, title: "Moss", description: "Nice mossy green" },
+            { id: 7, title: "Country Road", description: "On my way home" },
+            { id: 8, title: "Bloom", description: "Cherry blossoms in full bloom" },
+            { id: 9, title: "San Francisco", description: "San Francisco by sunset" },
+            { id: 12, title: "Leafs", description: "Autumn leafs on the patio" }
+          ]
+        },
+        template: $("#listview-template").html()
+      });
+    });
+  </script>
+
+</body>
+
+</html>

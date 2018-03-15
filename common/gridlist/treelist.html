@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TreeList | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/dropdown.js"></script>
+
+</head>
+
+<body>
+	<div id="_main_layout" class="gray-bg">
+    <div>
+      <div class="row page-heading border-bottom white-bg">
+        <div class="col-lg-12">
+          <h2 class="page-title fn-text-center">
+            数据列表
+            <small>TreeList</small>
+          </h2>
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">数据列表</a></li>
+            <li class="active"><a>TreeList</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>TreeList（使用treeList.expand(selector)展开行）</h5>
+                <div class="ibox-tools">
+                  <a><i class="iconfont icon-xiugai"></i></a>
+                </div>
+              </div>
+              <div class="ibox-content">
+        				<form id="search_form">
+        					<table width="100%">
+        						<tr>
+											<td width="80px" class="label">部门名称：</td>
+											<td width="250px" >
+												<input name="condition.fuzzyName" class="k-textbox" type="text" autofocus>
+											</td>
+                      <td></td>
+      								<td width="100px" valign="top">
+      									<button type="submit" class="k-button btn-primary">查 询</button>
+      								</td>
+        						</tr>
+        					</table>
+        				</form>
+                <div id="treelist"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+	<script>
+		$(function() {
+			$("#_main_layout").kendoSplitter({
+				orientation: "vertical",
+				panes: [{
+					collapsible: false,
+					resizable: false,
+					scrollable: false,
+					size: "110px"
+				}, {
+					collapsible: false
+				}]
+			});
+
+			$("#treelist").kendoTreeList({
+				height: "100%",
+				groupable: false,
+				selectable: true,
+        height: "400px",
+				toolbar: '<a class="k-button" onclick="add(this)" href="javascript:void(0)"><i class="iconfont icon-zengjiaxiang"></i> 新增</a> ' +
+					'<a class="k-button" onclick="edit(this)" href="javascript:void(0)"><i class="iconfont icon-xiugai"></i> 修改</a>' +
+					'<a class="k-button" onclick="del(this)" href="javascript:void(0)"><i class="iconfont icon-shanchu"></i> 删除</a>',
+				messages: {
+					noRows: "无记录",
+					loading: "加载中...",
+					requestFailed: "请求失败.",
+					retry: "重试",
+					commands: {
+						edit: "编辑",
+						update: "修改",
+						canceledit: "取消",
+						create: "新增",
+						createchild: "新增子记录",
+						destroy: "删除",
+						excel: "导出Excel",
+						pdf: "导出PDF"
+					}
+				},
+        // dataSource: {
+        //   transport: {
+        //     read: {
+        //       url: "/usercenter/department/list",
+        //       type: "POST",
+        //       dataType: "json",
+        //       cache: false,
+        //       data: function (p) {
+        //         var arr = $("#search_form").serializeArray();
+        //         if (arr && arr.length > 0) {
+        //           var d = {};
+        //           $.each(arr, function (idx, it) {
+        //             if (it.value) {
+        //               // 多选情况下，同一key有多个值
+        //               if (d[it.name]) {
+        //                 d[it.name] = d[it.name] + "," + it.value;
+        //               }
+        //               else {
+        //                 d[it.name] = it.value;
+        //               }
+        //             }
+        //           });
+        //           return d;
+        //         }
+        //         return {};
+        //       }
+        //     }
+        //   }
+        // },
+        dataSource: [{
+					"createdBy": 1,
+					"createdDate": "2016-03-09 10:08:15",
+					"description": "系统自动创建的根节点,不能删除",
+					"hasChildren": true,
+					"id": 10001,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "ROOT",
+					"pid": 0,
+				}, {
+					"createdDate": "2016-03-10 08:33:31",
+					"description": "研发中心",
+					"hasChildren": true,
+					"id": 10002,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "研发中心",
+					"parentId": 10001,
+					"pid": 10001,
+				}, {
+					"createdDate": "2016-03-10 08:33:31",
+					"description": "研发中心-产品研发部",
+					"hasChildren": false,
+					"id": 10003,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "产品研发部",
+					"parentId": 10002,
+					"pid": 10001,
+				}, {
+					"createdDate": "2016-03-10 08:33:31",
+					"description": "研发中心-平台研发部",
+					"hasChildren": false,
+					"id": 10004,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "平台研发部",
+					"parentId": 10002,
+					"pid": 10001,
+				}, {
+					"createdDate": "2016-03-10 08:47:33",
+					"description": "智慧旅游事业部",
+					"hasChildren": true,
+					"id": 10005,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "智慧旅游事业部",
+					"parentId": 10001,
+					"pid": 10001,
+				}, {
+					"createdDate": "2016-03-10 08:47:33",
+					"description": "智慧旅游事业部-项目一部",
+					"hasChildren": false,
+					"id": 10006,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "项目一部",
+					"parentId": 10005,
+					"pid": 10005,
+				}, {
+					"createdDate": "2016-03-10 08:47:33",
+					"description": "智慧旅游事业部-项目二部",
+					"hasChildren": false,
+					"id": 10007,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "项目二部",
+					"parentId": 10005,
+					"pid": 10005,
+				}, {
+					"createdDate": "2016-03-10 08:47:44",
+					"description": "财务部",
+					"hasChildren": false,
+					"id": 10008,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "财务部",
+					"parentId": 10001,
+					"pid": 10001,
+				}, {
+					"createdDate": "2016-03-10 08:48:00",
+					"description": "人力资源部",
+					"hasChildren": false,
+					"id": 10009,
+					"lastModifiedDate": "2016-03-10 09:16:43",
+					"name": "人力资源部",
+					"parentId": 10001,
+					"pid": 10001,
+				}],
+				columns: [{
+					field: "name",
+					title: "部门名称",
+					width: 300
+				}, {
+					field: "description",
+					title: "备注"
+				}]
+			});
+
+      var treeList = $("#treelist").data("kendoTreeList");
+      treeList.expand($("#treelist tbody>tr"));
+
+			$("#search_form").submit(function(event) {
+				var _this = this;
+				var grid = $("#treelist").data("kendoTreeList");
+				btn_running($("*[type='submit']", _this));
+				grid.dataSource.xquery({
+					page: 1,
+					pageSize: grid.dataSource.pageSize()
+				}, null, function() {
+					btn_enabled($("button[type='submit']", _this));
+				}, function() {
+					notify("查询出错", "warn", true);
+				});
+				event.preventDefault();
+				return false;
+			});
+
+		});
+
+		function add() {
+			var grid = $("#treelist").data("kendoTreeList");
+			var row = grid.select();
+			var pid = "";
+
+			if (row && row.length > 0) {
+				var data = grid.dataItem(row);
+				if (data) {
+					pid = data.id;
+				}
+			}
+			dialog("dlg_department_add", "添加新部门信息", "add.html", 480, 260);
+		}
+
+		function edit() {
+			var grid = $("#treelist").data("kendoTreeList");
+			var row = grid.select();
+			if (null == row || row.length == 0) {
+				notify("你还没有选择要修改的部门", "warn");
+				return;
+			}
+			var data = grid.dataItem(row);
+			dialog("dlg_department_edit", "修改部门信息", "edit.html", 480, 260);
+		}
+
+		function del(btn) {
+			var grid = $("#treelist").data("kendoTreeList");
+			if (!grid || grid.select().length == 0) {
+				notify("没有选择任何行.", "warning");
+				return;
+			}
+			var data = grid.dataItem(grid.select()[0]);
+			if (!data || !data.id) {
+				notify("无法找到主键数据.", "error", false);
+				return;
+			}
+			if (data.deleteable === false) {
+				notify("该条数据禁止删除.", "warning");
+				return;
+			}
+			if (!confirm("确定要删除吗?")) {
+				return;
+			}
+			btn_running(btn);
+			$.ajax({
+				type: "POST",
+				url: "delete",
+				data: {
+					id: data.id
+				},
+				success: function(res) {
+					if (res && res.status == "success") {
+						notify(res.message || "删除成功!");
+					} else {
+						var msg = "删除失败!";
+						if (res && res.status == "error") {
+							msg = res.message;
+						}
+						notify(msg, "error", false);
+					}
+				},
+				complete: function() {
+					btn_enabled(btn);
+					if (grid) {
+						grid.dataSource.read();
+					}
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>

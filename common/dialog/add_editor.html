@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Editor Form | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+</head>
+
+<body>
+  <form id="_sub_layout" class="dialog-form">
+    <div id="_sub_layout_center">
+      <!-- 隐藏项 -->
+      <input required="" type="hidden" name="pid" id="required_pid" value="">
+      <table class="form-table">
+        <tr>
+          <td width="15%" class="label"><span class="form-required">*</span>设备名称：</td>
+          <td width="80%">
+            <input class="k-textbox" type="text" value="信息大楼1F设备01">
+          </td>
+          <td width="5%">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="label">设备编码：</td>
+          <td>
+            <input class="k-textbox" type="text" readonly value="A_01F_DM_01">
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">规格型号：</td>
+          <td>
+            <input class="k-textbox" type="text">
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">选择用户：</td>
+          <td>
+            <select name="userIds" id="user_select_ids"></select>
+            <script>
+              $(function() {
+                $("#user_select_ids").kendoExtMultiSelect({
+                  dataTextField: "name",
+                  dataValueField: "id",
+                  multiple: true,
+                  onclick: function(){
+                    dialog('dlg_select_users','选择用户','./common/dialog/user_select.html',800,400);
+                  }
+                });
+              });
+            </script>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label"><span class="form-required">*</span>报警状态：</td>
+          <td>
+            <select class="ui-dropdownlist" style="180px;">
+              <option value="NORMAL">正常</option>
+              <option value="EXCEPTION">异常</option>
+              <option value="OVERLOAD">高负荷</option>
+            </select>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td valign="top" class="label">报警描述：</td>
+          <td>
+            <textarea class="k-textbox" rows="4" id="description_editor" placeholder=""></textarea>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">创建时间：</td>
+					<td>
+						<input class="k-textbox _current_date_time" readonly="">
+					</td>
+					<td></td>
+        </tr>
+        <tr>
+          <td class="label">保留时间：</td>
+          <td>
+            <input class="k-textbox" type="text">
+            <i class="unit r-icon">天</i>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">其他项：</td>
+          <td>
+            <input type="checkbox" id="testCheckbox1" value="">
+            <label for="testCheckbox1">内容1</label>
+            <input type="checkbox" id="testCheckbox2" value="">
+            <label for="testCheckbox2">内容2</label>
+            <input type="checkbox" id="testCheckbox3" value="">
+            <label for="testCheckbox3">内容3</label>
+            <input type="checkbox" id="testCheckbox4" value="">
+            <label for="testCheckbox4">内容4</label>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div id="_sub_layout_bottom">
+      <div class="footer text-center">
+        <button class="k-button btn-primary" type="submit">
+          <i class="iconfont icon-dui"></i>&nbsp;确 定
+        </button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="k-button btn-white" type="reset">
+          <i class="iconfont icon-cuowu"></i>&nbsp;取 消
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.editor.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+
+      $("#description_editor").kendoEditor();
+
+      $("#_sub_layout").kendoSplitter({
+        orientation: "vertical",
+        panes: [{
+          collapsible: false
+        }, {
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: $(".footer").outerHeight() || "49px"
+        }]
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

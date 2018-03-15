@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UI元素 > Notification | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/dropdown.js"></script>
+
+</head>
+
+<body>
+
+  <div id="_main_layout" class="gray-bg">
+    <div class="row border-bottom white-bg page-heading">
+      <div class="col-lg-12">
+        <h2 class="page-title fn-text-center">
+          UI元素 <small>Notification</small>
+        </h2>
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">UI元素</a></li>
+          <li class="active"><a>Notification</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>Tooltips | Kendo UI </h5>
+              <div class="ibox-tools">
+                <a class="collapse-link"><i class="iconfont icon-chevronup"></i></a>
+                <a class="collapse-link"><i class="iconfont icon-xiugai"></i></a>
+                <a class="close-link"><i class="iconfont icon-cuowu"></i></a>
+              </div>
+            </div>
+            <div class="ibox-content text-center">
+              <h4> Tooltip Demo </h4>
+              <div id="tooltip_demo">
+                <button id="tooltip_left" type="button" class="k-button btn-default">左侧Tooltip</button>
+                <button id="tooltip_top" type="button" class="k-button btn-default">顶部Tooltip</button>
+                <button id="tooltip_bottom" type="button" class="k-button btn-default">底部Tooltip</button>
+                <button id="tooltip_right" type="button" class="k-button btn-default">右侧Tooltip</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>Notification | Kendo UI </h5>
+              <div class="ibox-tools">
+                <a class="collapse-link"><i class="iconfont icon-chevronup"></i></a>
+                <a class="collapse-link"><i class="iconfont icon-xiugai"></i></a>
+                <a class="close-link"><i class="iconfont icon-cuowu"></i></a>
+              </div>
+            </div>
+            <div class="ibox-content text-center" id="notification_demo">
+              <button id="showStaticNotification" class="k-button">在下面显示 Success | Info | Warning | Error Notification</button>
+              <button id="showPopupNotification" class="k-button">固定在右下角弹出Error Notification</button>
+              <br><br>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>Popup | Kendo UI </h5>
+              <div class="ibox-tools">
+                <a class="collapse-link"><i class="iconfont icon-chevronup"></i></a>
+                <a class="collapse-link"><i class="iconfont icon-xiugai"></i></a>
+                <a class="close-link"><i class="iconfont icon-cuowu"></i></a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <p>
+                <button class="k-button" id="open_popup">点击打开Popup</button>
+              </p>
+              <div id="popup_1" style="width:200px; height:100px;">
+                <p class="m">
+                  PopUp content ... <br>Message ... <br>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5> 提示样式 | Alert</h5>
+              <div class="ibox-tools">
+                <a class="collapse-link"><i class="iconfont icon-chevronup"></i></a>
+                <a class="collapse-link"><i class="iconfont icon-xiugai"></i></a>
+                <a class="close-link"><i class="iconfont icon-cuowu"></i></a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="alert alert-success">
+                  How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+              <div class="alert alert-info">
+                  How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+              <div class="alert alert-warning">
+                  How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+              <div class="alert alert-danger">
+                  How quickly daft jumping zebras vex. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>可关闭提示样式 | Alert</h5>
+              <div class="ibox-tools">
+                <a class="collapse-link"><i class="iconfont icon-chevronup"></i></a>
+                <a class="collapse-link"><i class="iconfont icon-xiugai"></i></a>
+                <a class="close-link"><i class="iconfont icon-cuowu"></i></a>
+              </div>
+            </div>
+            <div class="ibox-content">
+              <div class="alert alert-success alert-dismissable">
+                  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                  A wonderful serenity has taken possession. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+              <div class="alert alert-info alert-dismissable">
+                  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                  A wonderful serenity has taken possession. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+              <div class="alert alert-warning alert-dismissable">
+                  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                  A wonderful serenity has taken possession. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+              <div class="alert alert-danger alert-dismissable">
+                  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                  A wonderful serenity has taken possession. <a class="alert-link" href="#">Alert Link</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <span id="popupNotification_error"></span>
+  <span id="staticNotification"></span>
+
+<script type="text/javascript">
+  $(function() {
+    /* Tooltip */
+    $("#tooltip_left").kendoTooltip({
+      content: "<span>Demo 2: Tooltip on left .</span>",
+      position: "left"
+    });
+
+    $("#tooltip_top").kendoTooltip({
+      content: "<span>Demo 2: Tooltip on top.</span>",
+      position: "top"
+    });
+
+    $("#tooltip_bottom").kendoTooltip({
+      content: "<span>Demo 3: Tooltip on bottom.</span>",
+      position: "bottom"
+    });
+
+    $("#tooltip_right").kendoTooltip({
+      content: "<span>Demo 4: Tooltip on right.</span>",
+      position: "right"
+    });
+
+    /* Notification */
+    var popupNotification_error = $("#popupNotification_error").kendoNotification({
+      autoHideAfter: 0
+    }).data("kendoNotification");
+    var staticNotification = $("#staticNotification").kendoNotification({
+      appendTo: "#notification_demo",
+      // autoHideAfter: 0
+    }).data("kendoNotification");
+
+    $("#showPopupNotification").click(function() {
+      var d = new Date();
+      popupNotification_error.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"), "error");
+    });
+    $("#showStaticNotification").click(function() {
+      newStaticNotification();
+      clearInterval(interval);
+    });
+
+    var interval = setInterval(function() {
+      newStaticNotification();
+    },1500);
+
+    var i = 0;
+    var type_arr = ["success","info","warning","error"];
+    function newStaticNotification() {
+      var d = new Date();
+      staticNotification.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"), type_arr[i%4]);
+      var container = $(staticNotification.options.appendTo);
+      container.scrollTop(container[0].scrollHeight);
+      i++;
+    }
+
+    /* Popup */
+    var input_popup = $("#popup_1").kendoPopup({
+      anchor: $("#open_popup"),
+      origin: "bottom left",
+      position: "top left",
+      collision: "fit flip"
+    }).data("kendoPopup");
+    $("#open_popup").click(function(){
+      input_popup.open();
+    });
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Add Form | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+  <style>
+    .form-table.table-bordered .td {
+      height: 34px;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="_sub_layout" class="dialog-form">
+    <div id="_sub_layout_center" class="">
+      <table class="form-table table-bordered" style="margin:15px 2%; width:96%;">
+        <tr>
+          <td width="12%" class="label"><span class="form-required">*</span>设备名称：</td>
+          <td width="35%">
+            <input class="k-textbox" type="text" value="信息大楼1F设备01">
+          </td>
+          <td width="14%" class="label">设备编码：</td>
+          <td width="35%">
+            <input class="k-textbox" type="text" readonly value="A_01F_DM_01">
+          </td>
+        </tr>
+        <tr>
+          <td class="label">设备位置：</td>
+          <td>
+            <input class="k-textbox" type="text" value="">
+          </td>
+          <td rowspan="5" class="label">设备图片：</td>
+          <td rowspan="5">
+            <!-- <img style="width:150px; height: 200px; display:inline-block" /> -->
+            <input type="file" name="files" id="photo"/>
+            <script>
+            $("#photo").kendoUpload({
+              multiple: false,
+              validation: {
+                allowedExtensions: [".jpg", ".png"],
+                maxFileSize: 30000 // Defines the maximum file size that can be uploaded in bytes.
+              }
+            });
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td class="label"><span class="form-required">*</span>报警状态：</td>
+          <td>
+            <select class="ui-dropdownlist" style="180px;">
+              <option value="NORMAL">正常</option>
+              <option value="EXCEPTION">异常</option>
+              <option value="OVERLOAD">高负荷</option>
+            </select>
+          </td>
+
+        </tr>
+        <tr>
+          <td class="label">状态时间：</td>
+          <td>
+            <input id="datetime" type="text" value="2017-06-02 16:25">
+            <script>
+              $("#datetime").kendoDateTimePicker({
+                format: "yyyy-MM-dd HH:mm:ss",
+                culture: "zh-CN"
+              });
+            </script>
+          </td>
+
+        </tr>
+        <tr>
+          <td class="label">选项：</td>
+          <td>
+            <input type="checkbox" id="testCheckbox1" value="">
+            <label for="testCheckbox1">内容1</label>
+            <input type="checkbox" id="testCheckbox2" value="">
+            <label for="testCheckbox2">内容2</label>
+            <input type="checkbox" id="testCheckbox3" value="">
+            <label for="testCheckbox3">内容3</label>
+            <input type="checkbox" id="testCheckbox4" value="">
+            <label for="testCheckbox4">内容4</label>
+          </td>
+
+        </tr>
+        <tr>
+          <td class="label">规格型号：</td>
+          <td>
+            <input class="k-textbox" type="text">
+          </td>
+
+        </tr>
+        <tr>
+          <td valign="top" class="label">报警描述：</td>
+          <td colspan="3">
+            <textarea class="k-textbox" rows="4" id="description_editor" placeholder=""></textarea>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="_sub_layout_bottom">
+      <div class="footer text-center">
+        <button class="k-button btn-primary" type="submit">
+          <i class="iconfont icon-dui"></i>&nbsp;确定
+        </button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="k-button btn-white" type="reset">
+          <i class="iconfont icon-cuowu"></i>&nbsp;取消
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <script type="text/javascript">
+    $(function() {
+
+      $("#_sub_layout").kendoSplitter({
+        orientation: "vertical",
+        panes: [{
+          collapsible: false
+        }, {
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: $(".footer").outerHeight() || "49px"
+        }]
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

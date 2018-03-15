@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Editor Form | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+</head>
+
+<body>
+  <form id="_sub_layout" class="dialog-form">
+    <div id="_sub_layout_center">
+      <!-- 隐藏项 -->
+      <input required="" type="hidden" name="pid" id="required_pid" value="">
+      <table class="form-table">
+        <tr>
+          <td width="140" class="label"><span class="form-required">*</span>实例名称：</td>
+          <td width="400">
+            <input name="serviceInstance.name" class="k-textbox" value="" autofocus>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label"><span class="form-required">*</span>选择服务：</td>
+          <td>
+            <input id="coordinate" name="coordinateId" value="" style="width:100%;">
+            <script>
+            $("#coordinate").kendoDropDownList({
+                dataSource: [
+                  {id: 11062, name: "service_1", status: "RUNNING"},
+                  {id: 11077, name: "service_2", status: "RUNNING"},
+                  {id: 11083, name: "service_3", status: "RUNNING"},
+                ],
+                dataTextField: "name",
+                dataValueField: "id"
+            });
+            </script>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label"><span class="form-required">*</span>选择选项：</td>
+          <td style="margin:0;padding:0;">
+            <input id="brokers" type="hidden" name="brokers" value="">
+            <table id="node_container">
+              <tr no="1">
+                <td width="280">
+                  <select name="userIds" id="user_select_ids"></select>
+                  <script>
+                    $(function() {
+                      $("#user_select_ids").kendoExtMultiSelect({
+                        dataTextField: "name",
+                        dataValueField: "id",
+                        placeholder: "选择选项",
+                        multiple: true,
+                        onclick: function() {
+                          dialog('dlg_select_users', '选择选项', './common/dialog/user_select.html', 800, 400);
+                        }
+                      });
+                    });
+                  </script>
+                </td>
+                <td width="70">
+                  <input id="port_1" class="k-textbox" placeholder="端口" value="9092">
+                </td>
+                <td width="50">
+                  <a href="javascript:void(0)" onclick="addRow(this)"><span class="k-icon k-i-plus"></span></a>
+                  <a href="javascript:void(0)" onclick="delRow(this)" class="fn-pl-5"><span class="k-icon k-i-minimize"></span></a>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">备注信息：</td>
+          <td>
+            <textarea name="serviceInstance.description" class="k-textbox"></textarea>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">创建人：</td>
+          <td>
+            <input class="k-textbox" value="userName" readonly>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">创建时间：</td>
+          <td>
+            <input class="k-textbox _current_date_time" value="" readonly>
+            <script>
+            $("._current_date_time").val(kendo.toString(new Date(), "yyyy-MM-dd HH:mm:ss"));
+            </script>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+
+
+    </div>
+    <div id="_sub_layout_bottom">
+      <div class="footer text-center">
+        <button class="k-button btn-primary" type="submit">
+          <i class="iconfont icon-dui"></i>&nbsp;确 定
+        </button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="k-button btn-white" type="reset">
+          <i class="iconfont icon-cuowu"></i>&nbsp;取 消
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <script type="text/javascript">
+    $(function() {
+
+      $("#_sub_layout").kendoSplitter({
+        orientation: "vertical",
+        panes: [{
+          collapsible: false
+        }, {
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: $(".footer").outerHeight() || "49px"
+        }]
+      });
+
+    });
+
+    function addRow(a) {
+      var n = new Date().getTime();
+      var tr = '<tr no="' + n + '">' +
+        '<td width="280"><select id="select_node_' + n + '" class="node_select"></select></td>' +
+        '<td width="70"><input id="port_' + n + '" class="k-textbox" placeholder="端口" value="9092"></td>' +
+        '<td width="50">' +
+        '<a href="javascript:void(0)" onclick="addRow(this)"><span class="k-icon k-i-plus"></span></a>' +
+        '<a href="javascript:void(0)" onclick="delRow(this)" class="fn-pl-5"><span class="k-icon k-i-minimize"></span></a>' +
+        '</td></tr>';
+      $("#node_container").append(tr);
+      $("#select_node_" + n).kendoExtMultiSelect({
+        dataTextField: "name",
+        dataValueField: "id",
+        placeholder: "选择选项",
+        onclick: function() {
+          dialog('dlg_select_nodes', '选择选项', './common/dialog/user_select.html', 800, 400);
+        }
+      });
+    }
+
+    function delRow(a) {
+      var row = $(a).closest("tr");
+      if (row.siblings("tr").length < 1) {
+        notify("至少有一条Broke节点配置！", "warning");
+      } else {
+        row.remove();
+      }
+    }
+  </script>
+
+</body>
+
+</html>

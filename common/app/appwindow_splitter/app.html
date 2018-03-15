@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>UI2.0 | APP橱窗</title>
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <!-- Custom scripts -->
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/plugins/appCarousel/appCarousel.js"></script>
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/plugins/appCarousel/appCarousel.css" rel="stylesheet"/>
+  <style>
+  *{ margin:0;padding:0;}
+  html,body{height:100%;}
+
+  body{
+  	font:12px/22px Verdana,Arial,sans-serif,"Times New Roman",宋体;
+  	text-align:center;
+  	min-width:830px;
+  	color: #676a6c;
+  }
+  body.k-widget {
+    /*background-color: rgba(0,0,0,0.7);*/
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .5)), to(rgba(0, 0, 0, .0001)));
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=0);
+    background-repeat: repeat-x;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:focus, a:hover {
+    color: #23527c;
+  	outline-style: none;
+    text-decoration: underline;
+  }
+  .k-splitter {
+    height: 100%;
+    border-width: 0;
+    overflow: hidden;
+    background-color: transparent;
+  }
+  .k-splitter .k-splitbar {
+    border-width: 0;
+    height: 0;
+    width: 0;
+  }
+
+  #logo{
+  	width:500px;
+  	height:75px;
+    line-height: 75px;
+    text-align: center;
+    font-size: 56px;
+    color: #fff;
+    background-image: linear-gradient(0, #b8b8b8, #fff);
+    font-weight: 600;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  	/*background:url(./images/logo.png) center center no-repeat;*/
+    margin:auto;
+  	padding:10px;
+  }
+  #logout{
+  	display:block;
+  	width:40px;
+  	height:24px;
+  	line-height:24px;
+  	float:right;
+  	margin-top:-65px;
+  	margin-right:60px;
+  }
+  .footer {
+  	text-align: left;
+    background: none repeat scroll 0 0 white;
+    border-top: 1px solid #e7eaec;
+    padding: 10px 20px;
+  	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .appCarousel-nav-item {
+    border-color: #666;
+  }
+  .appCarousel-nav-item.active {
+    border: none;
+    background: rgba(0,0,0,0.5);
+  }
+  </style>
+</head>
+<body id="_layout">
+
+  <div id="_layout_top">
+    <div id="logo">SYSTEM TITLE</div>
+    <a href="#" id="logout">注销</a>
+  </div>
+
+  <div id="_layout_middle" class="appCarousel">
+    <div class="_sub_layout_left">
+      <a class="appCarousel-control left"><span class="label">Previous</span></a>
+    </div>
+    <div id="_sub_layout_center">
+      <ul class="appCarousel-content">
+        <li><div><a href="#"><img src="images/img_1.gif"/><p>智慧管理1</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_2.gif"/><p>智慧管理2</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_3.gif"/><p>智慧管理3</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_4.gif"/><p>智慧管理4</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_5.gif"/><p>智慧管理5</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_6.gif"/><p>智慧管理6</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_7.gif"/><p>智慧管理7</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_8.gif"/><p>智慧管理8</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_9.gif"/><p>智慧管理9</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_10.gif"/><p>智慧管理10</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_11.gif"/><p>智慧管理11</p></a></div></li>
+        <li><div><a href="#"><img src="images/img_12.gif"/><p>智慧管理12</p></a></div></li>
+      </ul>
+      <div class="appCarousel-nav"></div>
+    </div>
+    <div id="_sub_layout_right">
+      <a class="appCarousel-control right"><span class="label">Next</span></a>
+    </div>
+  </div>
+
+  <div id="_layout_bottom" class="footer">
+    <div style="float:right"> 10GB of <strong>250GB</strong> Free.</div>
+    <strong>Copyright </strong><span>&copy; 2017-2019 浙江游宇集智能科技有限公司</span>
+  </div>
+
+  <script>
+    $(function() {
+
+      $("#_layout").kendoSplitter({
+          orientation: "vertical",
+          panes: [
+              {collapsible: false, resizable: false, scrollable: false, size: $("#_layout_top").outerHeight()},
+              {collapsible: false},
+              {collapsible: false, resizable: false, scrollable: false, size: $("#_layout_bottom").outerHeight()}
+          ]
+      });
+
+      $("#_layout_middle").kendoSplitter({
+          orientation: "horizontal",
+          panes: [
+              {collapsible: false, resizable: false, scrollable: false, size: "60px"},
+              {collapsible: false},
+              {collapsible: false, resizable: false, scrollable: false, size: "60px"}
+          ],
+          resize: function(e) {
+          }
+      });
+
+      $("#_layout_middle").appCarousel();
+
+    })
+  </script>
+</body>
+
+</html>

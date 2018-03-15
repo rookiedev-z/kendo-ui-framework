@@ -1,0 +1,37 @@
+[{
+  "code": "NORMAL",
+  "dictionaryCode": "USER_STATUS",
+  "id": 1000001,
+  "name": "正常",
+  "sort": 99
+}, {
+  "code": "BLOCKED",
+  "dictionaryCode": "USER_STATUS",
+  "id": 1000002,
+  "name": "禁止",
+  "sort": 90
+}, {
+  "code": "LOCKED",
+  "dictionaryCode": "USER_STATUS",
+  "id": 1000003,
+  "name": "锁定",
+  "sort": 80
+}, {
+  "code": "EXCESSIVE_ATTEMPTS",
+  "dictionaryCode": "USER_STATUS",
+  "id": 1000004,
+  "name": "过多尝试",
+  "sort": 70
+}, {
+  "code": "EXPIRED_CREDENTIALS",
+  "dictionaryCode": "USER_STATUS",
+  "id": 1000005,
+  "name": "密码过期",
+  "sort": 60
+}, {
+  "code": "DELETED",
+  "dictionaryCode": "USER_STATUS",
+  "id": 1000006,
+  "name": "已删除",
+  "sort": 0
+}]

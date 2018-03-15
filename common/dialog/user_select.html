@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Grid > 选择列表 | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+  <script>
+    var USER_STATUS = [{"code":"NORMAL","dictionaryCode":"USER_STATUS","id":1000001,"name":"正常","sort":99},{"code":"BLOCKED","dictionaryCode":"USER_STATUS","id":1000002,"name":"禁止","sort":90},{"code":"LOCKED","dictionaryCode":"USER_STATUS","id":1000003,"name":"锁定","sort":80},{"code":"EXCESSIVE_ATTEMPTS","dictionaryCode":"USER_STATUS","id":1000004,"name":"过多尝试","sort":70},{"code":"EXPIRED_CREDENTIALS","dictionaryCode":"USER_STATUS","id":1000005,"name":"密码过期","sort":60},{"code":"DELETED","dictionaryCode":"USER_STATUS","id":1000006,"name":"已删除","sort":0}];
+  </script>
+</head>
+
+<body>
+<div id="_sub_layout">
+  <form id="search_form" style="margin: 10px 0;">
+    <table class="form-table">
+      <tr>
+        <td width="80" class="label">用户姓名：</td>
+        <td width="180">
+          <input name="condition.fuzzyName" class="k-textbox" type="text">
+        </td>
+        <td width="100" class="label">登录名：</td>
+        <td width="180">
+          <input name="condition.fuzzyUsername" class="k-textbox" type="text">
+        </td>
+        <td width="120" class="label">用户状态：</td>
+        <td width="140">
+          <select name="condition.status" id="user_status" style="width:120px"></select>
+          <script>
+            $(function () {
+                $("#user_status").kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "code",
+                    optionLabel: "选择状态",
+                    dataSource: USER_STATUS
+                });
+            });
+          </script>
+        </td>
+        <td></td>
+        <td width="100px">
+          <button type="submit" class="k-button btn-primary">查 询</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <div id="_sub_layout_center">
+    <div id="grid"></div>
+  </div>
+
+  <div id="_sub_layout_bottom">
+    <div class="footer text-center no-top-border">
+      <button class="k-button btn-primary" type="button" id="btn_confirm">
+        <i class="iconfont icon-dui"></i> 确定选择
+      </button>
+      <button class="k-button btn-white m-l" type="button">
+        <i class="iconfont icon-cuowu"></i> 取 消
+      </button>
+    </div>
+  </div>
+
+</div>
+
+  <script type="text/javascript">
+  var multiple = true, selected = [],
+      parentWin, multiSelect;
+
+  if(top.$("#_main_frame").length>0) {
+    parentWin = top.$("#_main_frame")[0].contentWindow || top.$(".k-window-iframecontent iframe")[0].contentWindow;
+    // multiSelect_el = top.$("#${dlgId} iframe")[0].contentWindow.$("${el}");
+    multiSelect = parentWin.$("#user_select_ids").data("kendoMultiSelect") || parentWin.$("#user_select_ids").data("kendoExtMultiSelect");
+  };
+
+  if(multiSelect) {
+    selected = multiSelect.value();
+  }
+  /*
+  if(multiSelect.options && multiSelect.options.multiple != undefined) {
+    multiple = multiSelect.options.multiple;
+  }
+  else {
+    multiple = ${multiple!true};
+  }
+  */
+  function getUserStatusName(code) {
+    var name;
+    $.each(USER_STATUS, function(idx, it) {
+     if(it.code == code) {
+       name = it.name;
+     }
+    });
+    return name;
+  }
+
+  $(function() {
+    $("#_sub_layout").kendoSplitter({
+      orientation: "vertical",
+      panes: [
+        {collapsible: false, resizable: false, scrollable: false, size: "56px"},
+        {collapsible: false},
+        {collapsible: false, resizable: false, scrollable: false, size: $(".footer").outerHeight() || "49px"}
+      ]
+    });
+
+    $("#grid").kendoExtGrid({
+      entityName: "user",
+      scrollable: true,
+      dataURL: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/users.json",
+      requestType: "GET",
+      toolbarButtons: [],
+      columns: [
+        {
+          width: 50,
+          headerTemplate: kendo.template("#if(multiple) {# <input id='select_all' type='checkbox'> #}else{# 选择 #}#"),
+          headerAttributes: {
+            style: "text-align:center"
+          },
+          template: "<input value='#=data.id#' name='ids' type='#if(multiple){#checkbox#}else{#radio#}#' #if(selected.indexOf(data.id)>=0){#checked#}#>",
+          attributes: {
+            style: "text-align:center"
+          }
+        },{
+          width: 150,
+          title: "登录名",
+          template: "<a href='javascript:void(0)' title='查看#: name #的详细信息' onclick=\"dialog('dlg_user_view','查看#:name #的信息','/usercenter/user/view?id=#: id #',600,400)\">#: username #</a>",
+          field: "username"
+        }, {
+          width: 120,
+          title: "手机号码",
+          field: "phone",
+          attributes: {
+            style: "text-align: center"
+          }
+        }, {
+          width: 100,
+          title: "用户姓名",
+          field: "name"
+        }, {
+          width: 180,
+          title: "电子邮箱",
+          field: "email"
+        }, {
+          field: "ownedRoles",
+          title: "所属角色",
+          width: 200,
+          template: "# if(data.ownedRoles){for(var i=0;i<data.ownedRoles.length;i++){var role=data.ownedRoles[i].name;var rolename=data.ownedRoles[i].name;if(i>0){# , # } # <a href=\"javascript:void(0)\" title=\"查看#: rolename #的详细信息\" onclick=\"dialog('dlg_role_view','查看#:rolename #的信息','/usercenter/role/view?id=#: data.ownedRoles[i].id #',480,280)\"> #:role #</a> #}} #"
+        }, {
+          field: "lastLoggedIn",
+          width: 150,
+          title: "最后登录",
+          // template: "# if(data.lastLoggedIn){ # #: kendo.toString(new Date(lastLoggedIn), 'yyyy-MM-dd HH:mm:ss') # #}#"
+        }, {
+          field: "status",
+          width: 100,
+          title: "状态",
+          // template: " # var statusComponent = $('\\#user_status').data('kendoDropDownList');if(statusComponent){# #=statusComponent.dataSource.get(data.status).name# #} #"
+          template: "# var statusName = getUserStatusName(data.status); if(statusName){ #  #=statusName#  #}#"
+        }, {
+          title: "备注",
+          field: "description",
+          // width: 150,
+          attributes: {
+            "class": "single-line"
+          }
+        }, {
+          hidden: true,
+          field: "id"
+        }
+      ],
+      dataBound: function() {
+        var allchecked = true;
+
+        $("input[name='ids']").each(function() {
+          if(!this.checked) {
+            allchecked = false;
+          }
+          $(this).click(function() {
+            addSelected(this);
+            if(!this.checked) {
+              $("#select_all").prop("checked", false);
+            }
+          })
+        });
+
+        $("#select_all").prop("checked", allchecked).click(function() {
+          var me = this;
+          $("input[name='ids']").each(function() {
+            var _this = this;
+            _this.checked = me.checked;
+            addSelected(_this);
+          })
+        });
+      }
+    });
+
+    $("#btn_confirm").click(function () {
+      var grid = $("#grid").data("kendoExtGrid");
+      if (!grid) {
+          notify("错误的回调", "warn", true);
+          return;
+      }
+
+      if(!selected || selected.length == 0) {
+        multiSelect.value([]);
+        closeCurrentDialog();
+        return ;
+      }
+
+      for (var i = 0; i < selected.length; i++) {
+          var selectedId = selected[i];
+
+          if (multiSelect.value().indexOf(selectedId) >= 0) continue;
+
+          if (!multiSelect.dataSource.get(selectedId)) {
+            var name = getNameById(selectedId);
+            multiSelect.dataSource.add({"id": selectedId, "name": name});
+          }
+      }
+
+      if (!multiple) {
+        selected = [selected[selected.length - 1]];
+      }
+
+      multiSelect.value(selected);
+/*
+      // IF validate
+      var validator = parentWin.$("form").data("kendoExtValidator");
+      if (validator) {
+        validator.validateInput(parentWin.$("${el}"));
+      }
+*/
+      closeCurrentDialog();
+
+    });
+
+  });
+
+  function getNameById (id) {
+    var grid = $("#grid").data("kendoExtGrid");
+    var cb = $("input[value='" + id +"']", grid.content);
+    var row = cb.closest("tr");
+    var data = grid.dataItem(row);
+    if (data) {
+      return data["name"];
+    }
+    return null;
+  }
+
+  function addSelected(c) {
+    var row = $(c).closest("tr");
+    var grid = $("#grid").data("kendoExtGrid");
+    var data = grid.dataItem(row);
+    if(!data) return;
+    var id = data.id, idx = selected.indexOf(id);
+    if(c.checked) {
+      if(idx == -1) {
+        selected.push(id);
+      }
+    }
+    else {
+      if(idx >= 0) {
+        selected.splice(idx, 1);
+      }
+    }
+  }
+  </script>
+</body>
+
+</html>

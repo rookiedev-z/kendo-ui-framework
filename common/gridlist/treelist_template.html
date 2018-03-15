@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TreeList(Template) | UI2.0</title>
+
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/dropdown.js"></script>
+
+</head>
+
+<body>
+	<div id="_main_layout" class="gray-bg">
+    <div>
+      <div class="row page-heading border-bottom white-bg">
+        <div class="col-lg-12">
+          <h2 class="page-title fn-text-center">
+            数据列表
+            <small>TreeList</small>
+          </h2>
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">数据列表</a></li>
+            <li class="active"><a>文件列表</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ibox">
+              <div class="ibox-title">
+                <h5>TreeList（文件列表 自定义icon）</h5>
+                <div class="ibox-tools">
+                  <a><i class="iconfont icon-xiugai"></i></a>
+                </div>
+              </div>
+              <div class="ibox-content">
+        				<form id="search_form">
+        					<table width="100%">
+                    <tr>
+											<td width="80px" class="label">文件路径：</td>
+											<td width="400px">
+												<input class="k-textbox" type="text" id="path_show" autofocus value="/" onchange="path.value=value">
+											</td>
+                      <td>
+                        <input name="path" style="display: none" type="text" value="/">
+                      </td>
+      								<td width="100" valign="top">
+      									<button type="submit" class="k-button btn-primary">查 询</button>
+      								</td>
+      							</tr>
+        					</table>
+        				</form>
+                <div id="treelist"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+	<script>
+		$(function() {
+			$("#_main_layout").kendoSplitter({
+				orientation: "vertical",
+				panes: [{
+					collapsible: false,
+					resizable: false,
+					scrollable: false,
+					size: "110px"
+				}, {
+					collapsible: false
+				}]
+			});
+
+      var data_model = kendo.data.TreeListModel.define({
+        id: "path",
+        fields: {
+          path: {
+            type: "string",
+            nullable: false,
+            parse: function(e) {
+              return e
+            }
+          },
+          parentId: {
+            field: "parentPath",
+            nullable: true,
+            type: "string",
+            defaultValue: null,
+            parse: function(e) {
+              var _parentId = e ? e : null;
+              if(e) {
+                _parentId = (e == $("input[id='path_show']").val()) ? null : e;
+              }
+              return _parentId;
+            }
+          }
+        }
+      });
+
+			$("#treelist").kendoTreeList({
+				height: "100%",
+				groupable: false,
+				selectable: true,
+        height: "400px",
+				toolbar: '<a class="k-button" onclick="addFolder(this)" href="javascript:void(0)"><i class="iconfont icon-zengjiaxiang"></i> 新建文件夹</a> ' +
+					'<a class="k-button" onclick="uploadFile(this)" href="javascript:void(0)"><i class="iconfont icon-upload"></i> 上传</a>' +
+					'<a class="k-button" onclick="downloadFile(this)" href="javascript:void(0)"><i class="iconfont icon-download"></i> 下载</a>',
+				messages: {
+					noRows: "无记录",
+					loading: "加载中...",
+					requestFailed: "请求失败.",
+					retry: "重试",
+					commands: {
+						edit: "编辑",
+						update: "修改",
+						canceledit: "取消",
+						create: "新增",
+						createchild: "新增子记录",
+						destroy: "删除"
+					}
+				},
+        dataSource: {
+          transport: {
+            read: {
+              // url: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/files.json",
+              url: "../../data/files.json",
+              type: "GET",
+              dataType: "json",
+              cache: false,
+              data: function (p) {
+                var arr = $("#search_form").serializeArray();
+                if (arr && arr.length > 0) {
+                  var d = {};
+                  $.each(arr, function (idx, it) {
+                    if (it.value) {
+                      // 多选情况下，同一key有多个值
+                      if (d[it.name]) {
+                        d[it.name] = d[it.name] + "," + it.value;
+                      }
+                      else {
+                        d[it.name] = it.value;
+                      }
+                    }
+                  });
+                  console.log(d);
+                  return d;
+                }
+                return {};
+              }
+            }
+          },
+          schema: {
+            model: data_model,
+            //对返回的数据先进行处理，添加hasChildren属性，设置其是否有子节点
+            parse: function(response) {
+              for (var i=0; i<response.length; i++) {
+                if(response[i].directory) {
+                  response[i].hasChildren = true;
+                }
+                else {
+                  response[i].hasChildren = false;
+                }
+              }
+              return response;
+            }
+          }
+        },
+				columns: [
+          {
+            field: "path",
+            title: "文件名",
+            expandable: true,
+            width: 160,
+            template: "# if(data.directory) {# <i class='iconfont icon-folder text-light-blue'></i> "
+            + "# } else if(data.symbolicLink) {# <i class='iconfont icon-link'></i>"
+            + "# } else {# <i class='iconfont icon-file'></i>"
+            + "# } #"
+            + "#: name #"
+          }, {
+            field: "owner",
+            title: "拥有者",
+            width: 120
+          }, {
+            field: "group",
+            title: "组",
+            width: 100
+          }, {
+            field: "modificationTime",
+            title: "修改时间",
+            width: 140,
+            template: "#:kendo.toString(new Date(modificationTime), 'yyyy-MM-dd HH:mm:ss') #"
+          }, {
+            field: "replication",
+            title: "备份数",
+            width: 60
+          }
+        ],
+        expand: function(e) {
+          $("input[name='path']").val(e.model.id);
+        }
+			});
+
+			$("#search_form").submit(function(event) {
+				var _this = this;
+				var grid = $("#treelist").data("kendoTreeList");
+				btn_running($("*[type='submit']", _this));
+				grid.dataSource.xquery({
+					page: 1,
+					pageSize: grid.dataSource.pageSize()
+				}, null, function() {
+					btn_enabled($("button[type='submit']", _this));
+				}, function() {
+					notify("查询出错", "warn", true);
+				});
+				event.preventDefault();
+				return false;
+			});
+
+		});
+
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>增加用户 | UI2.0</title>
+  <meta charset="utf-8">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.common.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/styles/kendo.default.min.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/iconfont/iconfont.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/skin.css" rel="stylesheet">
+  <link href="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/css/animate.css" rel="stylesheet">
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/jquery.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/kendo.custom.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+  <script src="http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/js/ext.js"></script>
+</head>
+
+<body>
+  <form id="_sub_layout" method="post" action="add" class="dialog-form">
+    <div id="_sub_layout_center">
+      <fieldset class="border-top-dark m-t">
+        <legend>帐号信息</legend>
+        <table class="form-table">
+          <tr>
+            <td width="100" class="label">登录名：</td>
+            <td>
+              <input name="username" value="" class="k-textbox" autofocus>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">手机号码：</td>
+            <td>
+              <input name="phone" value="" class="k-textbox">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">电子邮箱：</td>
+            <td>
+              <input name="email" value="" class="k-textbox">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">密码：</td>
+            <td>
+              <input name="password" type="password" class="k-textbox">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">重复密码：</td>
+            <td>
+              <input name="repassword" type="password" class="k-textbox" data-rule="required;match[password];" data-msg-match="两次密码输入不一致">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">帐号状态：</td>
+            <td>
+              <select name="status" id="user_status"></select>
+              <script>
+                $(function() {
+                  $("#user_status").kendoDropDownList({
+                      dataTextField: "name",
+                      dataValueField: "code",
+                      optionLabel: "选择状态",
+                      dataSource: {
+                          transport: {
+                              read: {
+                                  url: "http://enjoy-skins.oss-cn-hangzhou.aliyuncs.com/ued/1.0/skins/template1/data/user_status.json",
+                                  dataType: "json"
+                              }
+                          }
+                      }
+                  });
+                });
+              </script>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </fieldset>
+      <fieldset class="border-top-dark">
+        <legend>人员信息</legend>
+        <table class="form-table">
+          <tr>
+            <td width="100" class="label">用户姓名：</td>
+            <td>
+              <input name="name" value="" class="k-textbox">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">联系地址：</td>
+            <td>
+              <input name="address" value="" class="k-textbox">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">选择用户：</td>
+            <td>
+              <select name="userIds" id="user_select_ids"></select>
+              <script>
+                $(function() {
+                  $("#user_select_ids").kendoExtMultiSelect({
+                    dataTextField: "name",
+                    dataValueField: "id",
+                    multiple: true,
+                    onclick: function(){
+                      dialog('dlg_select_users','选择用户','./common/dialog/user_select.html?selectDlgId=dlg_select_users&dlgId=dlg_user_add&el=%23user_select_ids',800,400);
+                    }
+                  });
+                });
+              </script>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">选择部门：</td>
+            <td>
+              <select name="ownedDepartmentIds" id="user_dep_ids"></select>
+              <script>
+                $(function() {
+                  $("#user_dep_ids").kendoExtMultiSelect({
+                    dataTextField: "name",
+                    dataValueField: "id",
+                    multiple: false,
+                    onclick: function () {
+                      // dialog('dlg_select_deps','选择部门','/usercenter/department/select?selectDlgId=dlg_select_deps&dlgId=dlg_user_add&el=%23user_dep_ids',800,400)
+                      dialog('dlg_select_users','选择部门','./common/dialog/user_select.html?selectDlgId=dlg_select_users&dlgId=dlg_user_add&el=%23user_select_ids',800,400);
+                    }
+                  });
+                });
+              </script>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">备注：</td>
+            <td>
+              <textarea name="description" class="k-textbox"></textarea>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </fieldset>
+      <fieldset class="border-top-dark">
+        <table class="form-table">
+          <tr>
+            <td width="100" class="label">创建人：</td>
+            <td>
+              <input class="k-textbox" value="管理员" readonly>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="label">创建时间：</td>
+            <td>
+              <input class="k-textbox _current_date_time" readonly>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+
+    <div id="_sub_layout_bottom">
+      <div class="footer text-center">
+        <button class="k-button btn-primary" type="submit">
+          <i class="iconfont icon-dui"></i>&nbsp;确定
+        </button>
+        &nbsp; &nbsp; &nbsp;
+        <button class="k-button btn-white" type="reset">
+          <i class="iconfont icon-cuowu"></i>&nbsp;取消
+        </button>
+      </div>
+    </div>
+
+  </form>
+  <script>
+    $(function() {
+
+      $("#_sub_layout").kendoSplitter({
+        orientation: "vertical",
+        panes: [{
+          collapsible: false
+        }, {
+          collapsible: false,
+          resizable: false,
+          scrollable: false,
+          size: $(".footer").outerHeight() || "49px"
+        }]
+      });
+
+      $("form").kendoExtValidator({
+        validations: {
+          "password": {
+            "required": {
+              "message": "{kendo.validation.messages.NotBlank}"
+            }
+          },
+          "code": {
+            "required": {
+              "message": "{kendo.validation.messages.NotBlank}"
+            }
+          },
+          "name": {
+            "required": {
+              "message": "{kendo.validation.messages.NotBlank}"
+            }
+          },
+          "description": {
+            "size": {
+              "data": [0, 255],
+              "message": "长度需要大于{0}, 小于{1}"
+            }
+          },
+          "username": {
+            "required": {
+              "message": "{kendo.validation.messages.NotBlank}"
+            }
+          }
+        }
+      });
+
+      $("form").kendoEntityForm({
+        entityId: "",
+        success: {
+          callback: function(that) {
+            var grid = top._main_frame.$("#grid").data("kendoExtGrid");
+            if (grid) {
+              grid.dataSource.xquery();
+            }
+          }
+        }
+      });
+      $("#user_certificateType").kendoComboBox({});
+    });
+  </script>
+</body>
+
+</html>
